@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>kie-drools-wb</artifactId>
+    <groupId>org.kie.docker</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>kie-drools-wb-master</artifactId>
+  <packaging>pom</packaging>
+  <name>KIE Drools Workbench (master branch) - Docker integration</name>
+
+  <properties>
+    <kie.docker.drools-wb.wildfly8.artifactId>kie-drools-wb-distribution-wars</kie.docker.drools-wb.wildfly8.artifactId>
+    <kie.docker.drools-wb.eap64.artifactId>kie-drools-wb-distribution-wars</kie.docker.drools-wb.eap64.artifactId>
+    <kie.docker.drools-wb.tomcat7.artifactId>kie-drools-wb-distribution-wars</kie.docker.drools-wb.tomcat7.artifactId>
+    <kie.docker.drools-wb-base.path>${project.build.directory}/docker-base</kie.docker.drools-wb-base.path>
+    <kie.docker.drools-wb.wildfly8.repositoryPath>${org.kie:kie-drools-wb-distribution-wars:war:wildfly8}</kie.docker.drools-wb.wildfly8.repositoryPath>
+    <kie.docker.drools-wb.eap64.repositoryPath>${org.kie:kie-drools-wb-distribution-wars:war:eap6_4}</kie.docker.drools-wb.eap64.repositoryPath>
+    <kie.docker.drools-wb.tomcat7.repositoryPath>${org.kie:kie-drools-wb-distribution-wars:war:tomcat7}</kie.docker.drools-wb.tomcat7.repositoryPath>
+  </properties>
+
+
+  <dependencies>
+
+    <!-- The kie-drools-wb WAR dependency for Wildly8. -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>${kie.docker.drools-wb.wildfly8.artifactId}</artifactId>
+      <version>${docker.kie.master.version}</version>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
+    </dependency>
+
+    <!-- The kie-drools-wb WAR dependency for JBoss EAP 6.4. -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>${kie.docker.drools-wb.eap64.artifactId}</artifactId>
+      <version>${docker.kie.master.version}</version>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
+    </dependency>
+
+    <!-- The kie-drools-wb WAR dependency for Tomcat7. -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>${kie.docker.drools-wb.tomcat7.artifactId}</artifactId>
+      <version>${docker.kie.master.version}</version>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <!-- 
+        Dependencies for deploying into Tomcat7 shared library. 
+    -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-tomcat-integration</artifactId>
+      <version>${docker.kie.master.version}</version>
+    </dependency>
+
+    <!-- The kie-drools-wb-base distribution files. -->
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-drools-wb-base</artifactId>
+      <version>${project.version}</version>
+      <type>zip</type>
+      <classifier>docker-base</classifier>
+    </dependency>
+
+  </dependencies>
+
+
+  <build>
+    <plugins>
+
+      <!-- Unpack kie-drools-wb-base distribution files for the docker images. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.docker</groupId>
+                  <artifactId>kie-drools-wb-base</artifactId>
+                  <type>zip</type>
+                  <classifier>docker-base</classifier>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${kie.docker.drools-wb-base.path}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Generate site report for dependencies for including it into the generated docker image. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <finalName>kie-drools-wb</finalName>
+          <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
+          <reportPlugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <reports>
+                <report>dependencies</report>
+              </reports>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-report</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Assemble the dockerfile and other stuff for building the docker image using these files as sources.
+           Used for filtering some properties in Dockerfiles before using them for image building. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-dockerfiles</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <descriptor>${kie.docker.drools-wb-base.path}/assembly/docker-assembly.xml</descriptor>
+          </descriptors>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jolokia</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker.maven.plugin.version}</version>
+        <configuration>
+          <!-- Global configuration. -->
+          <dockerHost>${docker.daemon.rest.url}</dockerHost>
+          <registry>${docker.registry}</registry>
+          <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
+          <authConfig>
+            <username></username>
+            <password></password>
+          </authConfig>
+          <useColor>true</useColor>
+          <logDate>default</logDate>
+          <verbose>true</verbose>
+
+          <!-- KIE Images. -->
+          <images>
+
+            <!-- Drools Workbench latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <image>
+              <name>${docker.kie.repository}/kie-drools-wb-wildfly8:${docker.build.kie.master.tag}</name>
+              <alias>kie-drools-wb-wildfly8-${docker.build.kie.master.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.directory}/${project.build.finalName}-docker/wildfly</dockerFileDir>
+                  <descriptor>${kie.docker.drools-wb-base.path}/assembly/assembly-kie-drools-wb-wildfly8.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiedroolswb.wf8.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+            <!-- Drools Workbench latest SNAPSHOT & JBoss EAP 6.4. -->
+            <image>
+              <name>${docker.kie.repository}/kie-drools-wb-eap64:${docker.build.kie.master.tag}</name>
+              <alias>kie-drools-wb-eap64-${docker.build.kie.master.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.directory}/${project.build.finalName}-docker/eap</dockerFileDir>
+                  <descriptor>${kie.docker.drools-wb-base.path}/assembly/assembly-kie-drools-wb-eap64.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiedroolswb.eap64.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+            <!-- Drools Workbench latest SNAPSHOT & Tomcat7. -->
+            <image>
+              <name>${docker.kie.repository}/kie-drools-wb-tomcat7:${docker.build.kie.master.tag}</name>
+              <alias>kie-drools-wb-tomcat7-${docker.build.kie.master.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.directory}/${project.build.finalName}-docker/tomcat</dockerFileDir>
+                  <descriptor>${kie.docker.drools-wb-base.path}/assembly/assembly-kie-drools-wb-tomcat7.xml</descriptor>
+                </assembly>
+              </build>
+              <!-- Run a Drools Workbench container for Wildfly8. -->
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:file:~/jbpm</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <!-- Empty password by default. -->
+                  <!--<KIE_CONNECTION_PASSWORD></KIE_CONNECTION_PASSWORD>-->
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiedroolswb.t7.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployment of web application archive \/usr\/local\/tomcat\/webapps\/kie-drools-wb\.war has finished in</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+          </images>
+        </configuration>
+
+        <executions>
+
+          <execution>
+            <id>kiedroolswb-build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+
+          <execution>
+            <id>kiedroolswb-start</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+
+        </executions>
+
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

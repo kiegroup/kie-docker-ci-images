@@ -1,0 +1,39 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  
+  <dependencySets>
+    
+    <!-- Required libs for Tomcat7 shared library. -->
+    <dependencySet>
+      <includes>
+        <include>org.codehaus.btm:btm</include>
+        <include>org.codehaus.btm:btm-tomcat55-lifecycle</include>
+        <include>com.h2database:h2</include>
+        <include>javax.transaction:jta</include>
+        <include>org.slf4j:slf4j-api</include>
+        <include>javax.security.jacc:javax.security.jacc-api</include>
+        <include>mysql:mysql-connector-java</include>
+        <include>postgresql:postgresql</include>
+      </includes>
+      <unpack>false</unpack>
+      <outputDirectory>./tomcat-libs</outputDirectory>
+    </dependencySet>
+    
+    <!-- Dashbuilder for Tomcat7 -->
+    <dependencySet>
+      <includes>
+        <include>org.dashbuilder:${kie.docker.uf-dashbuilder.tomcat7.artifactId}:war:tomcat7</include>
+      </includes>
+      <outputDirectory>.</outputDirectory>
+      <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
+    </dependencySet>
+
+  </dependencySets>
+
+  <!-- The generated maven site as a webapp. -->
+  <componentDescriptors>
+    <componentDescriptor>${kie.docker.uf-dashbuilder-base.path}/assembly/assembly-site.xml</componentDescriptor>
+  </componentDescriptors>
+  
+</assembly>

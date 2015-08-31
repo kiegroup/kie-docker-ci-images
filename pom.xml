@@ -1,0 +1,274 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>16</version>
+  </parent>
+  <groupId>org.kie.docker</groupId>
+  <artifactId>kie-docker-ci-images</artifactId>
+  <packaging>pom</packaging>
+  <name>KIE :: Docker images for CI and testing</name>
+
+  <!-- Bootstrap repository to locate the parent pom when the parent pom has not been build locally. -->
+  <repositories>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <properties>
+    
+    <!-- Configurable properties for the build. --> 
+    <docker.daemon.rest.url>http://localhost:2375</docker.daemon.rest.url>
+    <docker.registry>localhost:5000</docker.registry>
+    <docker.kie.repository>jboss-kie</docker.kie.repository>
+    <docker.kie.master.version>6.3.0-SNAPSHOT</docker.kie.master.version>
+    <docker.kie.product.version>6.2.1-SNAPSHOT</docker.kie.product.version>
+    <docker.dashbuilder.master.version>0.3.0-SNAPSHOT</docker.dashbuilder.master.version>
+    <docker.kie.ui.version>${project.version}</docker.kie.ui.version>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <kie.artifacts.deploy.path>/tmp/kie-artifacts</kie.artifacts.deploy.path>
+    
+    <!-- Properties for internal use. -->    
+    <docker.maven.plugin.version>0.11.3</docker.maven.plugin.version>
+    <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
+    <docker.build.kie.master.tag>${docker.kie.master.version}-${timestamp}</docker.build.kie.master.tag>
+    <docker.build.kie.product.tag>${docker.kie.product.version}-${timestamp}</docker.build.kie.product.tag>
+    <docker.build.dashbuilder.master.tag>${docker.dashbuilder.master.version}-${timestamp}</docker.build.dashbuilder.master.tag>
+    <docker.run.timeout>30000</docker.run.timeout>
+    
+  </properties>
+  
+  <dependencyManagement>
+
+    <dependencies>
+
+      <!-- Required by docker-maven-plugin for using the <wait> tag in run container configuration. -->
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>2.3</version>
+      </dependency>
+
+      <!-- The KIE Docker UI for Tomcat7. -->
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-docker-ui-distros</artifactId>
+        <version>${docker.kie.ui.version}</version>
+        <type>war</type>
+        <classifier>tomcat7</classifier>
+      </dependency>
+
+      <!-- 
+          Dependencies for deploying into Tomcat7 shared library. 
+      -->
+      <dependency>
+        <groupId>org.codehaus.btm</groupId>
+        <artifactId>btm</artifactId>
+        <version>2.1.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.btm</groupId>
+        <artifactId>btm-tomcat55-lifecycle</artifactId>
+        <version>2.1.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.3.161</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.transaction</groupId>
+        <artifactId>jta</artifactId>
+        <version>1.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.12</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.security.jacc</groupId>
+        <artifactId>javax.security.jacc-api</artifactId>
+        <version>1.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.35</version>
+        <type>jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.1-901-1.jdbc4</version>
+        <type>jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.8</version>
+      </dependency>
+      
+    </dependencies>
+    
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-dependency-properties</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    
+    <!-- All images and deploy artifacts. -->
+    <profile>
+      <id>all</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>all</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-wb</module>
+        <module>kie-drools-wb</module>
+        <module>uf-dashbuilder</module>
+        <module>kie-server</module>
+        <module>kie-artifacts</module>
+        <module>kie-docker-ui</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Workbench. -->
+    <profile>
+      <id>kie-wb</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-wb</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-wb</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Drools Workbench. -->
+    <profile>
+      <id>kie-drools-wb</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-drools-wb</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-drools-wb</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Execution Server. -->
+    <profile>
+      <id>kie-server</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-server</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-server</module>
+      </modules>
+    </profile>
+
+    <!-- UF Dashbuilder. -->
+    <profile>
+      <id>uf-dashbuilder</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>uf-dashbuilder</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>uf-dashbuilder</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Artifacts deployer module. -->
+    <profile>
+      <id>kie-artifacts</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-artifacts</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-artifacts</module>
+      </modules>
+    </profile>
+    
+    <!-- KIE docker UI. -->
+    <profile>
+      <id>kie-docker-ui</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-docker-ui</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-docker-ui</module>
+      </modules>
+    </profile>
+    
+  </profiles>
+  
+</project>
