@@ -13,7 +13,7 @@ ENV KIE_CONNECTION_USER sa
 # Empty password by default
 # ENV KIE_CONNECTION_PASSWORD 
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-drools-wb.artifact=${kie.docker.drools-wb.tomcat7.repositoryPath}
+LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:tomcat7
 
 ####### KIE-DROOLS-WB & SITE WAR############
 ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war

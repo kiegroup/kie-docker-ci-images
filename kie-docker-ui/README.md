@@ -1,3 +1,0 @@
-KIE Docker UI webapp
-====================
-

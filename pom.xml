@@ -8,6 +8,7 @@
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
+  <version>6.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>KIE :: Docker images for CI and testing</name>
 
@@ -30,26 +31,21 @@
   </repositories>
 
   <properties>
-    
-    <!-- Configurable properties for the build. --> 
+    <!-- Configurable properties for the build. -->
     <docker.daemon.rest.url>http://localhost:2375</docker.daemon.rest.url>
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
-    <docker.kie.master.version>6.3.0-SNAPSHOT</docker.kie.master.version>
-    <docker.kie.product.version>6.2.1-SNAPSHOT</docker.kie.product.version>
-    <docker.dashbuilder.master.version>0.3.0-SNAPSHOT</docker.dashbuilder.master.version>
-    <docker.kie.ui.version>${project.version}</docker.kie.ui.version>
+    <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
+    <docker.dashbuilder.artifacts.version>0.4.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>/tmp/kie-artifacts</kie.artifacts.deploy.path>
     
     <!-- Properties for internal use. -->    
     <docker.maven.plugin.version>0.11.3</docker.maven.plugin.version>
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
-    <docker.build.kie.master.tag>${docker.kie.master.version}-${timestamp}</docker.build.kie.master.tag>
-    <docker.build.kie.product.tag>${docker.kie.product.version}-${timestamp}</docker.build.kie.product.tag>
-    <docker.build.dashbuilder.master.tag>${docker.dashbuilder.master.version}-${timestamp}</docker.build.dashbuilder.master.tag>
+    <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
+    <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
     <docker.run.timeout>30000</docker.run.timeout>
-    
   </properties>
   
   <dependencyManagement>
@@ -177,7 +173,6 @@
         <module>uf-dashbuilder</module>
         <module>kie-server</module>
         <module>kie-artifacts</module>
-        <module>kie-docker-ui</module>
       </modules>
     </profile>
 

@@ -4,7 +4,7 @@
   <dependencySets>
     <dependencySet>
       <includes>
-        <include>org.kie:${kie.docker.drools-wb.eap64.artifactId}:war:eap6_4</include>
+        <include>org.kie:kie-drools-wb-distribution-wars:war:eap6_4</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
@@ -31,7 +31,7 @@
 
   <!-- The generated maven site as a webapp. -->
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.drools-wb-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>

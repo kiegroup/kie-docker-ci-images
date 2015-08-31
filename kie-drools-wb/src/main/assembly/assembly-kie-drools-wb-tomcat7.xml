@@ -31,7 +31,7 @@
     <!-- Drools WB for Tomcat7 -->
     <dependencySet>
       <includes>
-        <include>org.kie:${kie.docker.drools-wb.tomcat7.artifactId}:war:tomcat7</include>
+        <include>org.kie:kie-drools-wb-distribution-wars:war:tomcat7</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
@@ -41,7 +41,7 @@
 
   <!-- The generated maven site as a webapp. -->
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.drools-wb-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>
