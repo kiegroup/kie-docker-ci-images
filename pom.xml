@@ -41,7 +41,7 @@
     <kie.artifacts.deploy.path>/tmp/kie-artifacts</kie.artifacts.deploy.path>
     
     <!-- Properties for internal use. -->    
-    <docker.maven.plugin.version>0.11.3</docker.maven.plugin.version>
+    <docker.maven.plugin.version>0.13.3</docker.maven.plugin.version>
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
     <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
