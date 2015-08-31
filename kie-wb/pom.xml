@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.docker</groupId>
+    <artifactId>kie-docker-ci-images</artifactId>
+    <version>6.4.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>kie-wb</artifactId>
+  <packaging>jar</packaging>
+  <name>KIE Workbench :: Docker integration</name>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
+    </dependency>
+
+    <!-- The kie-wb WAR dependency for Tomcat7. -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <!--
+        Dependencies for deploying into Tomcat7 shared library.
+    -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-tomcat-integration</artifactId>
+      <type>jar</type>
+    </dependency>
+
+    <!--
+        Dependencies for deploying into Tomcat7 shared library. 
+    -->
+    <dependency>
+      <groupId>org.codehaus.btm</groupId>
+      <artifactId>btm</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.btm</groupId>
+      <artifactId>btm-tomcat55-lifecycle</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.spec.javax.transaction</groupId>
+      <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.spec.javax.security.jacc</groupId>
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>wildfly-mysql</classifier>
+      <type>tar.gz</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>wildfly-postgres</classifier>
+      <type>tar.gz</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>eap-mysql</classifier>
+      <type>tar.gz</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>eap-postgres</classifier>
+      <type>tar.gz</type>
+    </dependency>
+
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/docker</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <!-- Generate site report for dependencies for including it into the generated docker image. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <finalName>kie-wb</finalName>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-report</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jolokia</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <configuration>
+          <!-- KIE Images. -->
+          <images>
+            <!-- KIE Workbench latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <image>
+              <name>${docker.kie.repository}/kie-wb-wildfly8:${docker.build.kie.tag}</name>
+              <alias>kie-wb-wildfly8-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-wildfly8.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiewb.wf8.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-wb\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+            <!-- KIE Workbench latest SNAPSHOT & JBoss EAP 6.4. -->
+            <image>
+              <name>${docker.kie.repository}/kie-wb-eap64:${docker.build.kie.tag}</name>
+              <alias>kie-wb-eap64-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-eap64.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiewb.eap64.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-wb\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+            <!-- KIE Workbench latest SNAPSHOT & Tomcat7. -->
+            <image>
+              <name>${docker.kie.repository}/kie-wb-tomcat7:${docker.build.kie.tag}</name>
+              <alias>kie-wb-tomcat7-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-tomcat7.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:file:~/jbpm</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <!-- Empty password by default. -->
+                  <!--<KIE_CONNECTION_PASSWORD></KIE_CONNECTION_PASSWORD>-->
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiewb.t7.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-wb has finished in</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+          </images>
+        </configuration>
+        <executions>
+          <execution>
+            <id>kiewb-build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>kiewb-start</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
