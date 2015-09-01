@@ -12,8 +12,8 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-wb.artifact=${kie.docker.kie-wb.wildfly8.repositoryPath}
-LABEL org.jbpm.jbpm-dashboard.artifact=${kie.docker.jbpm-dashbuilder.wildfly8.repositoryPath}
+LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:wildfly8
+LABEL org.jbpm.jbpm-dashboard.artifact=org.jbpm.dashboard:jbpm-dashboard-distributions:war:wildfly8
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -48,7 +48,7 @@ ADD maven/modules/kie-wildfly-postgres-module.tar.gz $JBOSS_HOME/modules/system/
 # The project site report for the build
 ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
 
-# Work with unpacked WAR archives in Wilfly, so other images can override webapp files (such as persistence.xml,etc)
+# Work with unpacked WAR archives in WildFly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \

@@ -9,7 +9,7 @@
       <destName>kie-wb-site.jar</destName>
     </file>
     <file>
-      <source>${kie.docker.kie-wb-base.path}/assembly/site-web.xml</source>
+      <source>${pom.basedir}/src/main/assembly/site-web.xml</source>
       <outputDirectory>./site/WEB-INF</outputDirectory>
       <destName>web.xml</destName>
     </file>

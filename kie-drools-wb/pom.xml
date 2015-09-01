@@ -11,7 +11,7 @@
 
   <artifactId>kie-drools-wb</artifactId>
   <packaging>jar</packaging>
-  <name>KIE :: Drools Workbench Docker integration</name>
+  <name>KIE Drools Workbench :: Docker integration</name>
 
   <dependencies>
 

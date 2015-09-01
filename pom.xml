@@ -45,7 +45,7 @@
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
     <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
-    <docker.run.timeout>30000</docker.run.timeout>
+    <docker.run.timeout>60000</docker.run.timeout>
   </properties>
   
   <dependencyManagement>

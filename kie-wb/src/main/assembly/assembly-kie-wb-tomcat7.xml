@@ -31,7 +31,7 @@
     <!-- KIE WB for Tomcat7 -->
     <dependencySet>
       <includes>
-        <include>org.kie:${kie.docker.kie-wb.tomcat7.artifactId}:war:tomcat7</include>
+        <include>org.kie:kie-wb-distribution-wars:war:tomcat7</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
@@ -49,7 +49,7 @@
   </dependencySets>
 
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.kie-wb-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>

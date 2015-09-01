@@ -5,7 +5,7 @@
     <!-- The KIE WB war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie:${kie.docker.kie-wb.eap64.artifactId}:war:eap6_4</include>
+        <include>org.kie:kie-wb-distribution-wars:war:eap6_4</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
@@ -41,7 +41,7 @@
 
   <!-- The generated maven site as a webapp. -->
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.kie-wb-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>

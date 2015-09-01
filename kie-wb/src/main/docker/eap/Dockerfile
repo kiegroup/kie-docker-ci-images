@@ -12,8 +12,8 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-wb.artifact=${kie.docker.kie-wb.eap64.repositoryPath}
-LABEL org.jbpm.jbpm-dashboard.artifact=${kie.docker.jbpm-dashbuilder.eap64.repositoryPath}
+LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:eap6_4
+LABEL org.jbpm.jbpm-dashboard.artifact=org.jbpm.dashboard:jbpm-dashboard-distributions:war:eap6_4
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -33,7 +33,7 @@ ADD etc/kie-wb-users.properties $JBOSS_HOME/standalone/configuration/kie-wb-user
 ADD etc/kie-wb-roles.properties $JBOSS_HOME/standalone/configuration/kie-wb-roles.properties
 ADD etc/standalone-full-kie-wb.xml $JBOSS_HOME/standalone/configuration/standalone-full-kie-wb.xml
 
-# Custom kie-wb Wildfly startup scripts.
+# Custom kie-wb EAP startup scripts.
 ADD etc/start_kie-wb.sh $JBOSS_HOME/bin/start_kie-wb.sh
 ADD etc/update-jpa-config.sh $JBOSS_HOME/bin/update-jpa-config.sh
 
@@ -48,7 +48,7 @@ ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/laye
 # The project site report for the build
 ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
 
-# Work with unpacked WAR archives in Wilfly, so other images can override webapp files (such as persistence.xml,etc)
+# Work with unpacked WAR archives in EAP, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
