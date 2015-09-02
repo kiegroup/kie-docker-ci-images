@@ -9,7 +9,7 @@
       <destName>uf-dashbuilder-site.jar</destName>
     </file>
     <file>
-      <source>${kie.docker.uf-dashbuilder-base.path}/assembly/site-web.xml</source>
+      <source>${pom.basedir}/src/main/assembly/site-web.xml</source>
       <outputDirectory>./site/WEB-INF</outputDirectory>
       <destName>web.xml</destName>
     </file>

@@ -23,7 +23,7 @@
     <!-- Dashbuilder for Tomcat7 -->
     <dependencySet>
       <includes>
-        <include>org.dashbuilder:${kie.docker.uf-dashbuilder.tomcat7.artifactId}:war:tomcat7</include>
+        <include>org.dashbuilder:dashbuilder-distros:war:tomcat7</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
@@ -33,7 +33,7 @@
 
   <!-- The generated maven site as a webapp. -->
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.uf-dashbuilder-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>

@@ -13,7 +13,7 @@ ENV KIE_CONNECTION_USER sa
 # Empty password by default
 # ENV KIE_CONNECTION_PASSWORD 
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.dashbuilder.artifact=${kie.docker.uf-dashbuilder.tomcat7.repositoryPath}
+LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:tomcat7
 
 ####### DASHBUILDER & SITE WAR ############
 ADD maven/dashbuilder.war $CATALINA_HOME/webapps/dashbuilder.war

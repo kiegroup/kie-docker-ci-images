@@ -5,7 +5,7 @@
     <!-- The Dashbuilder war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.dashbuilder:${kie.docker.uf-dashbuilder.wildfly8.artifactId}:war:wildfly8</include>
+        <include>org.dashbuilder:dashbuilder-distros:war:wildfly8</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
@@ -32,7 +32,7 @@
 
   <!-- The generated maven site as a webapp. -->
   <componentDescriptors>
-    <componentDescriptor>${kie.docker.uf-dashbuilder-base.path}/assembly/assembly-site.xml</componentDescriptor>
+    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
   </componentDescriptors>
   
 </assembly>
