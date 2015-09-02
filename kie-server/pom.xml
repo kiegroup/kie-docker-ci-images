@@ -2,23 +2,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>kie-docker-integration</artifactId>
-    <groupId>org.kie.docker</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.docker</groupId>
+    <artifactId>kie-docker-ci-images</artifactId>
+    <version>6.4.0-SNAPSHOT</version>
+  </parent>
 
   <artifactId>kie-server</artifactId>
-  <packaging>pom</packaging>
-  <name>KIE Execution Server - Docker integration</name>
-  
-  <modules>
-    <module>kie-server-base</module>
-    <module>kie-server-master</module>
-  </modules>
+  <packaging>jar</packaging>
+  <name>KIE Execution Server :: Docker integration</name>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <classifier>ee6</classifier>
+      <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <classifier>ee7</classifier>
+      <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <classifier>webc</classifier>
+      <type>war</type>
+    </dependency>
+
+    <!--
+        Dependencies for deploying into Tomcat7 shared library.
+    -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-tomcat-integration</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+    </dependency>
 
     <!-- Required by docker-maven-plugin for using the <wait> tag in run container configuration. -->
     <dependency>
@@ -64,7 +92,193 @@
       <artifactId>maven-project-info-reports-plugin</artifactId>
       <version>2.8</version>
     </dependency>
-    
+
   </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/docker</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <!-- Generate site report for dependencies for including it into the generated docker image. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <finalName>kie-server</finalName>
+          <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
+          <reportPlugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <reports>
+                <report>dependencies</report>
+              </reports>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-report</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jolokia</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker.maven.plugin.version}</version>
+        <configuration>
+          <!-- Global configuration. -->
+          <dockerHost>${docker.daemon.rest.url}</dockerHost>
+          <registry>${docker.registry}</registry>
+          <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
+          <authConfig>
+            <username/>
+            <password/>
+          </authConfig>
+          <useColor>true</useColor>
+          <logDate>default</logDate>
+          <verbose>true</verbose>
+
+          <!-- KIE Images. -->
+          <images>
+
+            <!-- KIE Server latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <image>
+              <name>${docker.kie.repository}/kie-server-wildfly8:${docker.build.kie.tag}</name>
+              <alias>kie-server-wildfly8-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly8.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kieserver.wf8.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-server\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+            <!-- KIE Server latest SNAPSHOT & JBoss EAP 6.4. -->
+            <image>
+              <name>${docker.kie.repository}/kie-server-eap64:${docker.build.kie.tag}</name>
+              <alias>kie-server-eap64-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-eap64.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kieserver.eap64.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-server\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+            <!-- KIE Server latest SNAPSHOT & Tomcat7. -->
+            <image>
+              <name>${docker.kie.repository}/kie-server-tomcat7:${docker.build.kie.tag}</name>
+              <alias>kie-server-tomcat7-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-tomcat7.xml</descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:file:~/jbpm</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <!-- Empty password by default. -->
+                  <!--<KIE_CONNECTION_PASSWORD></KIE_CONNECTION_PASSWORD>-->
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kieserver.t7.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-server has finished in</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+
+          </images>
+        </configuration>
+
+        <executions>
+
+          <execution>
+            <id>kieserver-build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+
+          <execution>
+            <id>kieserver-start</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
