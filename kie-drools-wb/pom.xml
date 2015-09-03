@@ -171,7 +171,6 @@
       <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>${docker.maven.plugin.version}</version>
         <configuration>
           <!-- Global configuration. -->
           <dockerHost>${docker.daemon.rest.url}</dockerHost>

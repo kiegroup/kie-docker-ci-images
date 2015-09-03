@@ -41,7 +41,6 @@
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
     
     <!-- Properties for internal use. -->    
-    <docker.maven.plugin.version>0.13.3</docker.maven.plugin.version>
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
     <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
@@ -59,16 +58,7 @@
         <version>2.3</version>
       </dependency>
 
-      <!-- The KIE Docker UI for Tomcat7. -->
-      <dependency>
-        <groupId>org.kie.docker</groupId>
-        <artifactId>kie-docker-ui-distros</artifactId>
-        <version>${docker.kie.ui.version}</version>
-        <type>war</type>
-        <classifier>tomcat7</classifier>
-      </dependency>
-
-      <!-- 
+      <!--
           Dependencies for deploying into Tomcat7 shared library. 
       -->
       <dependency>
@@ -138,6 +128,15 @@
   </dependencyManagement>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.jolokia</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.13.3</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -247,20 +246,6 @@
       </activation>
       <modules>
         <module>kie-artifacts</module>
-      </modules>
-    </profile>
-    
-    <!-- KIE docker UI. -->
-    <profile>
-      <id>kie-docker-ui</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-docker-ui</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-docker-ui</module>
       </modules>
     </profile>
     
