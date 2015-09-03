@@ -2,57 +2,107 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>kie-docker-integration</artifactId>
-    <groupId>org.kie.docker</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.docker</groupId>
+    <artifactId>kie-docker-ci-images</artifactId>
+    <version>6.4.0-SNAPSHOT</version>
+  </parent>
 
   <artifactId>kie-artifacts</artifactId>
   <packaging>pom</packaging>
   <name>KIE Artifacts</name>
 
   <dependencies>
-
     <!-- Add dependencies for all this project modules. -->
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>kie-drools-wb-master</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
       <version>${project.version}</version>
-      <type>pom</type>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>kie-drools-wb-product</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
       <version>${project.version}</version>
-      <type>pom</type>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
     </dependency>
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>kie-wb-master</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-wb-distribution-wars</artifactId>
       <version>${project.version}</version>
-      <type>pom</type>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drools-wb-distribution-wars</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>kie-wb-product</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <version>${project.version}</version>
-      <type>pom</type>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
     </dependency>
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>kie-server-master</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <version>${project.version}</version>
-      <type>pom</type>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <type>war</type>
+      <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
-      <groupId>org.kie.docker</groupId>
-      <artifactId>uf-dashbuilder-master</artifactId>
-      <version>${project.version}</version>
-      <type>pom</type>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <type>war</type>
+      <classifier>wildfly8</classifier>
     </dependency>
-    
+    <dependency>
+      <groupId>org.jbpm.dashboard</groupId>
+      <artifactId>jbpm-dashboard-distributions</artifactId>
+      <version>${docker.kie.artifacts.version}</version>
+      <type>war</type>
+      <classifier>tomcat7</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <classifier>ee6</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <classifier>ee7</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <classifier>webc</classifier>
+    </dependency>
+
   </dependencies>
 
   <build>
