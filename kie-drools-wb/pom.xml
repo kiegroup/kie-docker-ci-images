@@ -146,16 +146,6 @@
         <artifactId>maven-site-plugin</artifactId>
         <configuration>
           <finalName>kie-drools-wb</finalName>
-          <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
-          <reportPlugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-              <reports>
-                <report>dependencies</report>
-              </reports>
-            </plugin>
-          </reportPlugins>
         </configuration>
         <executions>
           <execution>
@@ -167,7 +157,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>

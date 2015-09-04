@@ -109,16 +109,6 @@
         <artifactId>maven-site-plugin</artifactId>
         <configuration>
           <finalName>kie-server</finalName>
-          <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
-          <reportPlugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-              <reports>
-                <report>dependencies</report>
-              </reports>
-            </plugin>
-          </reportPlugins>
         </configuration>
         <executions>
           <execution>
