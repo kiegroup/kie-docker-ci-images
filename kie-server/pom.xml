@@ -48,13 +48,7 @@
       <version>${docker.kie.artifacts.version}</version>
     </dependency>
 
-    <!-- Required by docker-maven-plugin for using the <wait> tag in run container configuration. -->
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-    </dependency>
-
-    <!-- 
+    <!--
         Dependencies for deploying into Tomcat7 shared library. 
     -->
     <dependency>
@@ -125,21 +119,8 @@
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
-          <!-- Global configuration. -->
-          <dockerHost>${docker.daemon.rest.url}</dockerHost>
-          <registry>${docker.registry}</registry>
-          <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
-          <authConfig>
-            <username/>
-            <password/>
-          </authConfig>
-          <useColor>true</useColor>
-          <logDate>default</logDate>
-          <verbose>true</verbose>
-
           <!-- KIE Images. -->
           <images>
-
             <!-- KIE Server latest SNAPSHOT & Wildfly 8.1.0.Final. -->
             <image>
               <name>${docker.kie.repository}/kie-server-wildfly8:${docker.build.kie.tag}</name>
@@ -173,7 +154,6 @@
                 </log>
               </run>
             </image>
-
             <!-- KIE Server latest SNAPSHOT & JBoss EAP 6.4. -->
             <image>
               <name>${docker.kie.repository}/kie-server-eap64:${docker.build.kie.tag}</name>
@@ -207,7 +187,6 @@
                 </log>
               </run>
             </image>
-
             <!-- KIE Server latest SNAPSHOT & Tomcat7. -->
             <image>
               <name>${docker.kie.repository}/kie-server-tomcat7:${docker.build.kie.tag}</name>
@@ -242,12 +221,9 @@
                 </log>
               </run>
             </image>
-
           </images>
         </configuration>
-
         <executions>
-
           <execution>
             <id>kieserver-build</id>
             <phase>pre-integration-test</phase>
@@ -255,7 +231,6 @@
               <goal>build</goal>
             </goals>
           </execution>
-
           <execution>
             <id>kieserver-start</id>
             <phase>post-integration-test</phase>
@@ -263,9 +238,7 @@
               <goal>start</goal>
             </goals>
           </execution>
-
         </executions>
-
       </plugin>
     </plugins>
   </build>

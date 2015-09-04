@@ -48,16 +48,7 @@
   </properties>
 
   <dependencyManagement>
-
     <dependencies>
-
-      <!-- Required by docker-maven-plugin for using the <wait> tag in run container configuration. -->
-      <dependency>
-        <groupId>joda-time</groupId>
-        <artifactId>joda-time</artifactId>
-        <version>2.3</version>
-      </dependency>
-
       <!--
           Dependencies for deploying into Tomcat7 shared library. 
       -->
@@ -130,6 +121,19 @@
           <groupId>org.jolokia</groupId>
           <artifactId>docker-maven-plugin</artifactId>
           <version>0.13.3</version>
+          <configuration>
+            <!-- Global configuration. -->
+            <dockerHost>${docker.daemon.rest.url}</dockerHost>
+            <registry>${docker.registry}</registry>
+            <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
+            <authConfig>
+              <username/>
+              <password/>
+            </authConfig>
+            <useColor>true</useColor>
+            <logDate>default</logDate>
+            <verbose>true</verbose>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
