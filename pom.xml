@@ -39,14 +39,14 @@
     <docker.dashbuilder.artifacts.version>0.4.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
-    
-    <!-- Properties for internal use. -->    
+
+    <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
     <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
     <docker.run.timeout>60000</docker.run.timeout>
   </properties>
-  
+
   <dependencyManagement>
 
     <dependencies>
@@ -112,7 +112,7 @@
       </dependency>
 
     </dependencies>
-    
+
   </dependencyManagement>
 
   <build>
@@ -124,16 +124,6 @@
           <version>3.4</version>
           <configuration>
             <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
-            <reportPlugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.8</version>
-                <reports>
-                  <report>dependencies</report>
-                </reports>
-              </plugin>
-            </reportPlugins>
           </configuration>
         </plugin>
         <plugin>
@@ -159,9 +149,24 @@
       </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.8</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependencies</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <profiles>
-    
     <!-- All images and deploy artifacts. -->
     <profile>
       <id>all</id>
@@ -254,7 +259,7 @@
         <module>kie-artifacts</module>
       </modules>
     </profile>
-    
+
   </profiles>
-  
+
 </project>
