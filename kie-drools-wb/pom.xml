@@ -18,7 +18,6 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
@@ -26,7 +25,6 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
@@ -34,7 +32,6 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>tomcat7</classifier>
     </dependency>
@@ -45,7 +42,6 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-tomcat-integration</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
     </dependency>
 
     <!--
@@ -67,8 +63,8 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.transaction</groupId>
-      <artifactId>jta</artifactId>
+      <groupId>org.jboss.spec.javax.transaction</groupId>
+      <artifactId>jboss-transaction-api_1.1_spec</artifactId>
     </dependency>
 
     <dependency>
@@ -77,8 +73,8 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.security.jacc</groupId>
-      <artifactId>javax.security.jacc-api</artifactId>
+      <groupId>org.jboss.spec.javax.security.jacc</groupId>
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>
     </dependency>
 
     <dependency>
@@ -94,7 +90,6 @@
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
-      <version>${project.version}</version>
       <classifier>wildfly-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
@@ -102,7 +97,6 @@
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
-      <version>${project.version}</version>
       <classifier>wildfly-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
@@ -110,7 +104,6 @@
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
-      <version>${project.version}</version>
       <classifier>eap-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
@@ -118,7 +111,6 @@
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
-      <version>${project.version}</version>
       <classifier>eap-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
@@ -249,8 +241,7 @@
                   <port>kiedroolswb.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-drools-wb has finished in
-                  </log>
+                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-drools-wb has finished in</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>

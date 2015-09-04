@@ -10,9 +10,9 @@
         <include>org.codehaus.btm:btm</include>
         <include>org.codehaus.btm:btm-tomcat55-lifecycle</include>
         <include>com.h2database:h2</include>
-        <include>javax.transaction:jta</include>
+        <include>org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec</include>
         <include>org.slf4j:slf4j-api</include>
-        <include>javax.security.jacc:javax.security.jacc-api</include>
+        <include>org.jboss.spec.javax.security.jacc:jboss-jacc-api_1.4_spec</include>
         <include>mysql:mysql-connector-java</include>
         <include>postgresql:postgresql</include>
       </includes>

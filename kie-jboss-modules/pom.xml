@@ -14,24 +14,18 @@
   <name>KIE :: JBoss modules for Docker images</name>
 
   <dependencies>
-    
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <type>jar</type>
     </dependency>
-
     <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <type>jar</type>
     </dependency>
-    
   </dependencies>
 
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -59,7 +53,6 @@
           </archive>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
   

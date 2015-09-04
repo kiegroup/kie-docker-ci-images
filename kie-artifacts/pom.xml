@@ -14,25 +14,21 @@
   <name>KIE Artifacts</name>
 
   <dependencies>
-    <!-- Add dependencies for all this project modules. -->
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>tomcat7</classifier>
     </dependency>
@@ -40,21 +36,18 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>tomcat7</classifier>
     </dependency>
@@ -62,21 +55,18 @@
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
-      <version>${docker.kie.artifacts.version}</version>
       <type>war</type>
       <classifier>tomcat7</classifier>
     </dependency>
@@ -84,21 +74,18 @@
     <dependency>
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>ee6</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>ee7</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server</artifactId>
-      <version>${project.version}</version>
       <type>war</type>
       <classifier>webc</classifier>
     </dependency>
