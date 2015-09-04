@@ -15,7 +15,7 @@ ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_DATABASE kie
 LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:tomcat7
 
-####### KIE-DROOLS-WB & SITE WAR############
+####### KIE-DROOLS-WB & SITE WAR ############
 ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war
 ADD maven/site $CATALINA_HOME/webapps/site
 
@@ -25,15 +25,7 @@ unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-drools-w
 rm -rf $CATALINA_HOME/webapps/site/kie-drools-wb-site.jar
 
 ####### TOMCAT EXTRA LIBRARIES ############
-ADD maven/tomcat-libs/btm-2.1.4.jar $CATALINA_HOME/lib/btm-2.1.4.jar
-ADD maven/tomcat-libs/btm-tomcat55-lifecycle-2.1.4.jar $CATALINA_HOME/lib/btm-tomcat55-lifecycle-2.1.4.jar
-ADD maven/tomcat-libs/h2-1.3.161.jar $CATALINA_HOME/lib/h2-1.3.161.jar
-ADD maven/tomcat-libs/jta-1.1.jar $CATALINA_HOME/lib/jta-1.1.jar
-ADD maven/tomcat-libs/slf4j-api-1.7.12.jar $CATALINA_HOME/lib/slf4j-api-1.7.12.jar
-ADD maven/tomcat-libs/javax.security.jacc-api-1.5.jar $CATALINA_HOME/lib/javax.security.jacc-api-1.5.jar
-ADD maven/tomcat-libs/kie-tomcat-integration.jar $CATALINA_HOME/lib/kie-tomcat-integration.jar
-ADD maven/tomcat-libs/mysql-connector-java-5.1.35.jar $CATALINA_HOME/lib/mysql-connector-java-5.1.35.jar
-ADD maven/tomcat-libs/postgresql-9.1-901-1.jdbc4.jar $CATALINA_HOME/lib/postgresql-9.1-901-1.jdbc4.jar
+ADD maven/tomcat-libs $CATALINA_HOME/lib/
 
 ####### TOMCAT CONF FILES ############
 ADD etc/btm-config.properties  $CATALINA_HOME/conf/btm-config.properties
