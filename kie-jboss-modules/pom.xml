@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.docker</groupId>
+    <artifactId>kie-docker-ci-images</artifactId>
+    <version>6.4.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>kie-jboss-modules</artifactId>
+  <packaging>pom</packaging>
+  <name>KIE :: JBoss modules for Docker images</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <!-- JBoss Wildfly - MySQL driver module. -->
+            <descriptor>src/main/assembly/wildfly/assembly-wildfly-mysql.xml</descriptor>
+            <!-- JBoss Wildfly - PostgreSQL driver module. -->
+            <descriptor>src/main/assembly/wildfly/assembly-wildfly-postgres.xml</descriptor>
+            <!-- JBoss EAP - MySQL driver module. -->
+            <descriptor>src/main/assembly/eap/assembly-eap-mysql.xml</descriptor>
+            <!-- JBoss EAP - PostgreSQL driver module. -->
+            <descriptor>src/main/assembly/eap/assembly-eap-postgres.xml</descriptor>
+          </descriptors>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

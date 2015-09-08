@@ -1,0 +1,302 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>16</version>
+  </parent>
+  <groupId>org.kie.docker</groupId>
+  <artifactId>kie-docker-ci-images</artifactId>
+  <version>6.4.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>KIE :: Docker images for CI and testing</name>
+
+  <!-- Bootstrap repository to locate the parent pom when the parent pom has not been build locally. -->
+  <repositories>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <properties>
+    <!-- Configurable properties for the build. -->
+    <docker.daemon.rest.url>http://localhost:2375</docker.daemon.rest.url>
+    <docker.registry>localhost:5000</docker.registry>
+    <docker.kie.repository>jboss-kie</docker.kie.repository>
+    <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
+    <docker.dashbuilder.artifacts.version>0.4.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
+
+    <!-- Properties for internal use. -->
+    <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
+    <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
+    <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
+    <docker.run.timeout>60000</docker.run.timeout>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Defines versions for 3rd party artifacts. Using the kie-platform-bom to make sure the versions are always
+           properly aligned to the ones used in the KIE Platform. -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-platform-bom</artifactId>
+        <version>${docker.kie.artifacts.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jbpm.dashboard</groupId>
+        <artifactId>jbpm-dashboard-distributions</artifactId>
+        <version>${docker.kie.artifacts.version}</version>
+        <type>war</type>
+        <classifier>eap6_4</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.jbpm.dashboard</groupId>
+        <artifactId>jbpm-dashboard-distributions</artifactId>
+        <version>${docker.kie.artifacts.version}</version>
+        <type>war</type>
+        <classifier>wildfly8</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.jbpm.dashboard</groupId>
+        <artifactId>jbpm-dashboard-distributions</artifactId>
+        <version>${docker.kie.artifacts.version}</version>
+        <type>war</type>
+        <classifier>tomcat7</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>org.dashbuilder</groupId>
+        <artifactId>dashbuilder-distros</artifactId>
+        <version>${docker.dashbuilder.artifacts.version}</version>
+        <type>war</type>
+        <classifier>wildfly8</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.dashbuilder</groupId>
+        <artifactId>dashbuilder-distros</artifactId>
+        <version>${docker.dashbuilder.artifacts.version}</version>
+        <type>war</type>
+        <classifier>eap6_4</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.dashbuilder</groupId>
+        <artifactId>dashbuilder-distros</artifactId>
+        <version>${docker.dashbuilder.artifacts.version}</version>
+        <type>war</type>
+        <classifier>tomcat7</classifier>
+      </dependency>
+      <dependency>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.1-901-1.jdbc4</version>
+        <type>jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <classifier>wildfly-mysql</classifier>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <version>${project.version}</version>
+        <classifier>wildfly-postgres</classifier>
+        <type>tar.gz</type>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <version>${project.version}</version>
+        <classifier>eap-mysql</classifier>
+        <type>tar.gz</type>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <version>${project.version}</version>
+        <classifier>eap-postgres</classifier>
+        <type>tar.gz</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.4</version>
+          <configuration>
+            <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.jolokia</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.13.3</version>
+          <configuration>
+            <!-- Global configuration. -->
+            <dockerHost>${docker.daemon.rest.url}</dockerHost>
+            <registry>${docker.registry}</registry>
+            <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
+            <authConfig>
+              <username/>
+              <password/>
+            </authConfig>
+            <useColor>true</useColor>
+            <logDate>default</logDate>
+            <verbose>true</verbose>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-dependency-properties</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.8</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependencies</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <profiles>
+    <!-- All images and deploy artifacts. -->
+    <profile>
+      <id>all</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>all</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-wb</module>
+        <module>kie-drools-wb</module>
+        <module>uf-dashbuilder</module>
+        <module>kie-server</module>
+        <module>kie-artifacts</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Workbench. -->
+    <profile>
+      <id>kie-wb</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-wb</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-wb</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Drools Workbench. -->
+    <profile>
+      <id>kie-drools-wb</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-drools-wb</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-drools-wb</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Execution Server. -->
+    <profile>
+      <id>kie-server</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-server</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>kie-server</module>
+      </modules>
+    </profile>
+
+    <!-- UF Dashbuilder. -->
+    <profile>
+      <id>uf-dashbuilder</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>uf-dashbuilder</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-jboss-modules</module>
+        <module>uf-dashbuilder</module>
+      </modules>
+    </profile>
+
+    <!-- KIE Artifacts deployer module. -->
+    <profile>
+      <id>kie-artifacts</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>kie-artifacts</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kie-artifacts</module>
+      </modules>
+    </profile>
+
+  </profiles>
+
+</project>

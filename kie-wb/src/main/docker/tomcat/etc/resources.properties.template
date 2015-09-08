@@ -1,0 +1,9 @@
+resource.ds1.className=bitronix.tm.resource.jdbc.lrc.LrcXADataSource
+resource.ds1.uniqueName=jdbc/jbpm
+resource.ds1.minPoolSize=10
+resource.ds1.maxPoolSize=20
+resource.ds1.driverProperties.driverClassName=%DB_DRIVER%
+resource.ds1.driverProperties.url=%DB_URL%
+resource.ds1.driverProperties.user=%DB_USER%
+resource.ds1.driverProperties.password=%DB_PWD%
+resource.ds1.allowLocalTransactions=true
