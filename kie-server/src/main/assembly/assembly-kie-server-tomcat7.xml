@@ -31,7 +31,7 @@
     <!-- KIE Server for Tomcat7 -->
     <dependencySet>
       <includes>
-        <include>org.kie.server:kie-server:war:webc</include>
+        <include>org.kie:kie-server:war:webc</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-server.war</outputFileNameMapping>

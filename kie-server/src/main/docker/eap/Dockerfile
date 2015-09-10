@@ -7,7 +7,7 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
-LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:ee6
+LABEL org.kie.kie-server.artifact=org.kie:kie-server:war:ee6
 
 ####### SYSTEM USERS FOR DEVELOPMENT ############
 USER root

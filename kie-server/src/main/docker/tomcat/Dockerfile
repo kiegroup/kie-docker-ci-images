@@ -7,7 +7,7 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties
-LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:webc
+LABEL org.kie.kie-server.artifact=org.kie:kie-server:war:webc
 
 ####### KIE-SERVER & SITE WAR ############
 ADD maven/kie-server.war $CATALINA_HOME/webapps/kie-server.war

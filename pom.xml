@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
-  <version>6.4.0-SNAPSHOT</version>
+  <version>6.2.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>KIE :: Docker images for CI and testing</name>
 
@@ -53,7 +53,7 @@
            properly aligned to the ones used in the KIE Platform. -->
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-platform-bom</artifactId>
+        <artifactId>kie-parent-with-dependencies</artifactId>
         <version>${docker.kie.artifacts.version}</version>
         <scope>import</scope>
         <type>pom</type>
