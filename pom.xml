@@ -36,7 +36,7 @@
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>0.4.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
+    <docker.dashbuilder.artifacts.version>0.3.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
