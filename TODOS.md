@@ -24,3 +24,5 @@ TODOS
 
 **Server issues**           
 * Review Firewall is open for docker container's ports (ssh connections)           
+* Run clean-up scripts periodically - see https://github.com/chadoe/docker-cleanup-volumes                   
+
