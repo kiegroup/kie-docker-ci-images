@@ -36,14 +36,12 @@
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>0.4.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
     <docker.run.timeout>60000</docker.run.timeout>
   </properties>
 
@@ -78,34 +76,6 @@
         <version>${docker.kie.artifacts.version}</version>
         <type>war</type>
         <classifier>tomcat7</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>wildfly8</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>eap6_4</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>tomcat7</classifier>
-      </dependency>
-      <dependency>
-        <groupId>postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>9.1-901-1.jdbc4</version>
-        <type>jar</type>
       </dependency>
 
       <dependency>
@@ -217,7 +187,6 @@
         <module>kie-jboss-modules</module>
         <module>kie-wb</module>
         <module>kie-drools-wb</module>
-        <module>uf-dashbuilder</module>
         <module>kie-server</module>
         <module>kie-artifacts</module>
       </modules>
@@ -265,21 +234,6 @@
       <modules>
         <module>kie-jboss-modules</module>
         <module>kie-server</module>
-      </modules>
-    </profile>
-
-    <!-- UF Dashbuilder. -->
-    <profile>
-      <id>uf-dashbuilder</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>uf-dashbuilder</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>uf-dashbuilder</module>
       </modules>
     </profile>
 
