@@ -2,7 +2,6 @@ TODOS
 =====
 
 **Git repositories**           
-* Create git branches in repo for each branch to build (master, 6.3.x and 6.2.x)           
 * Clean "old" kie-docker-ci           
 
 **Maven modules**           
