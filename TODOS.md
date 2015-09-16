@@ -1,15 +1,10 @@
 TODOS
 =====
 
-**Git repositories**           
-* Clean "old" kie-docker-ci           
-
-**Maven modules**           
+**Maven modules**
 * Refactor kie-artifacts? each module should copy the artifacts to the target location.. this will allow modules to build independently           
 
-**Issues**           
-* kie-wb master using wildfly do not start.           
-* kie-drools-wb using wildfly master do not start.           
+**Issues**
 * build.sh script - error handling -> throw errors so that Jenkins can mark the job as failed            
         
         Eg: If Jenkins job fails (eg: timeout) , the build script execution continues on the target server.
