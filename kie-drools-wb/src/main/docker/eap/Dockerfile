@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM docker-registry.usersys.redhat.com/cloud_enablement/jboss-eap:6.4-15
+FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap:6.4
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
