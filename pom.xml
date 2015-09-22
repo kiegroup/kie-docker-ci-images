@@ -42,7 +42,7 @@
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.run.timeout>60000</docker.run.timeout>
+    <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
   <dependencyManagement>
