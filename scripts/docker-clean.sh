@@ -20,11 +20,16 @@ KIE_VERSION=$1
 BASE_VERSION=`echo ${KIE_VERSION} | cut -c -5`
 TIMESTAMP=`echo ${KIE_VERSION} | cut -c 7-`
 
+echo "Stopping containers with ${TIMESTAMP} in name"
 docker ps | grep "${TIMESTAMP}" | awk '{print $1}' | xargs -r docker stop
+echo "Stopping containers with ${BASE_VERSION} in name"
 docker ps | grep "${BASE_VERSION}" | awk '{print $1}' | xargs -r docker stop
+echo "Removing containers with ${TIMESTAMP} in name"
 docker ps -a | grep "${TIMESTAMP}" | awk '{print $1}' | xargs -r docker rm -f
+echo "Removing containers with ${BASE_VERSION} in name"
 docker ps -a | grep "${BASE_VERSION}" | awk '{print $1}' | xargs -r docker rm -f
 
 # don't remove images for the base version, they should be removed periodically with other script
 # we want to keep them around for some days in case needed
+echo "Removing images with ${TIMESTAMP} in name"
 docker images --no-trunc | grep "${TIMESTAMP}" | awk '{print $3}' | xargs -r docker rmi -f
