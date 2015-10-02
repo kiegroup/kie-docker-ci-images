@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
-  <version>6.3.0-SNAPSHOT</version>
+  <version>6.3.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>KIE :: Docker images for CI and testing</name>
 
@@ -36,7 +36,7 @@
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>0.3.3-SNAPSHOT</docker.dashbuilder.artifacts.version>
+    <docker.dashbuilder.artifacts.version>0.3.4-SNAPSHOT</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
