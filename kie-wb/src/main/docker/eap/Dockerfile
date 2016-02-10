@@ -45,9 +45,6 @@ ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive
 ADD maven/modules/kie-eap-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
-
 # Work with unpacked WAR archives in EAP, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
@@ -55,9 +52,6 @@ rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 unzip -q -d $JBOSS_HOME/standalone/deployments/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/dashbuilder.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/kie-wb-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/kie-wb-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy
 
 # Copy jboss-all.xml for Dashbuilder webapp, it must be deployed after kie-wb.
 ADD etc/jboss-all.xml $JBOSS_HOME/standalone/deployments/dashbuilder.war/META-INF/jboss-all.xml

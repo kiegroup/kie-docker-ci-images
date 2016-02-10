@@ -15,14 +15,11 @@ ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_DATABASE kie
 LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:tomcat7
 
-####### DASHBUILDER & SITE WAR ############
+####### DASHBUILDER WAR ############
 ADD maven/dashbuilder.war $CATALINA_HOME/webapps/dashbuilder.war
-ADD maven/site $CATALINA_HOME/webapps/site
 
 RUN unzip -q -d $CATALINA_HOME/webapps/dashbuilder $CATALINA_HOME/webapps/dashbuilder.war && \
-rm -rf $CATALINA_HOME/webapps/dashbuilder.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/uf-dashbuilder-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/uf-dashbuilder-site.jar
+rm -rf $CATALINA_HOME/webapps/dashbuilder.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

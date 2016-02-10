@@ -33,17 +33,10 @@ ADD etc/start_kie-server.sh $JBOSS_HOME/bin/start_kie-server.sh
 # Add the kie-server WAR artifact from the assembly result.
 ADD maven/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.war
 
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
-
 # Work with unpacked WAR archives in WildFly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-server.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-server-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/kie-server-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/kie-server-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy
-
 # Set right permissions for jboss user.
 RUN chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \

@@ -36,8 +36,7 @@ The images from this project are more complex and intended for achieving continu
 * Support for external MySQL and PostgreSQL databases                      
 * The web applications for the images are deployed as exploded war files by default
 * Each image contains helper scripts to achieve the different application servers and databases supported with just using Docker command line environment variables                            
-* Shell `root` access                 
-* Each image contains the Maven site for the module that has build it deployed inside the container's application server, to be able to see the exact versions used to build the image                       
+* Shell `root` access                                        
 
 So having in mind all these previous considerations, if just want to run/try any KIE application it's recommended to use the official community ones presented above. This images are more complex and uses latest SNAPSHOT versions for building the images, so images can not be stable at all.                    
 
@@ -47,7 +46,6 @@ Build process
 The build process for this project consist of the following steps:                 
 * Build database EAP/Wildfly modules artifacts that will be used for the next Docker images builds (module = `kie-jboss-modules`)                           
 * For each project's sub-module (`KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server`, `UF Dashbuilder`)               
-    * Create the Maven site for each KIE application located at each project's submodules                   
     * Create Docker images for `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` and `UF Dashbuilder` using latest SNAPSHOT versions from both `master` and `product` branches                                  
     * Push the images into the Docker registry (this step is currently disabled)                                    
     * Run a Docker container the each recently creaated image                    

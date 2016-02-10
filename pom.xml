@@ -143,14 +143,6 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.4</version>
-          <configuration>
-            <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
-          </configuration>
-        </plugin>
-        <plugin>
           <groupId>org.jolokia</groupId>
           <artifactId>docker-maven-plugin</artifactId>
           <version>0.13.3</version>

@@ -87,23 +87,6 @@
       </resource>
     </resources>
     <plugins>
-      <!-- Generate site report for dependencies for including it into the generated docker image. -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <finalName>kie-server</finalName>
-        </configuration>
-        <executions>
-          <execution>
-            <id>generate-report</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
 
       <plugin>
         <groupId>org.jolokia</groupId>

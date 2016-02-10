@@ -15,14 +15,11 @@ ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_DATABASE kie
 LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:tomcat7
 
-####### KIE-DROOLS-WB & SITE WAR ############
+####### KIE-DROOLS-WB WAR ############
 ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war
-ADD maven/site $CATALINA_HOME/webapps/site
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-drools-wb $CATALINA_HOME/webapps/kie-drools-wb.war && \
-rm -rf $CATALINA_HOME/webapps/kie-drools-wb.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-drools-wb-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/kie-drools-wb-site.jar
+rm -rf $CATALINA_HOME/webapps/kie-drools-wb.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

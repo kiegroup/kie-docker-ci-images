@@ -38,16 +38,11 @@ ADD maven/kie-drools-wb.war $JBOSS_HOME/standalone/deployments/kie-drools-wb-arc
 # Database MySQL and PostgreSQL modules
 ADD maven/modules/kie-wildfly-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-wildfly-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
 
 # Work with unpacked WAR archives in WildFly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-drools-wb.war $JBOSS_HOME/standalone/deployments/kie-drools-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-drools-wb.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-drools-wb-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/kie-drools-wb-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/kie-drools-wb-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy && \
 chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \
 chown jboss:jboss $JBOSS_HOME/bin/start_kie-drools-wb.sh && \

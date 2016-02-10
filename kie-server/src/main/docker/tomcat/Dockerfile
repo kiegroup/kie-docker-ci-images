@@ -9,13 +9,10 @@ ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
 LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:webc
 
-####### KIE-SERVER & SITE WAR ############
+####### KIE-SERVER WAR ############
 ADD maven/kie-server.war $CATALINA_HOME/webapps/kie-server.war
-ADD maven/site $CATALINA_HOME/webapps/site
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-server $CATALINA_HOME/webapps/kie-server.war && \
-rm -rf $CATALINA_HOME/webapps/kie-server.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-server-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/kie-server-site.jar
+rm -rf $CATALINA_HOME/webapps/kie-server.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/
