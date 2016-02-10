@@ -4,7 +4,7 @@
   
   <dependencySets>
     
-    <!-- Required libs for Tomcat7 shared library. -->
+    <!-- Required libs for Tomcat 8. -->
     <dependencySet>
       <includes>
         <include>org.codehaus.btm:btm</include>
@@ -13,12 +13,12 @@
         <include>org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec</include>
         <include>org.slf4j:slf4j-api</include>
         <include>org.jboss.spec.javax.security.jacc:jboss-jacc-api_1.4_spec</include>
-        <include>mysql:mysql-connector-java</include>
-        <include>postgresql:postgresql</include>
       </includes>
       <unpack>false</unpack>
       <outputDirectory>./tomcat-libs</outputDirectory>
     </dependencySet>
+
+    <!-- KIE Tomcat 8 Integration. -->
     <dependencySet>
       <includes>
         <include>org.kie:kie-tomcat-integration</include>
@@ -28,24 +28,14 @@
       <outputFileNameMapping>kie-tomcat-integration.jar</outputFileNameMapping>
     </dependencySet>
     
-    <!-- KIE WB for Tomcat7 -->
+    <!-- KIE Server for Tomcat 8 -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-wb-distribution-wars:war:tomcat7</include>
+        <include>org.kie.server:kie-server:war:webc</include>
       </includes>
       <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
+      <outputFileNameMapping>kie-server.war</outputFileNameMapping>
     </dependencySet>
-
-    <!-- The Dashboard builder war to include into docker container. -->
-    <dependencySet>
-      <includes>
-        <include>org.jbpm.dashboard:jbpm-dashboard-distributions:war:tomcat7</include>
-      </includes>
-      <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
-    </dependencySet>
-  
   </dependencySets>
 
 </assembly>

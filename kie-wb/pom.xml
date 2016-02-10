@@ -14,22 +14,18 @@
   <name>KIE Workbench :: Docker integration</name>
 
   <dependencies>
-
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
-
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
-
-    <!-- The kie-wb WAR dependency for Tomcat7. -->
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
@@ -43,14 +39,12 @@
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
-
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
-
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
@@ -58,87 +52,70 @@
       <classifier>tomcat7</classifier>
     </dependency>
 
-    <!--
-        Dependencies for deploying into Tomcat7 shared library.
-    -->
+    <!-- Additional dependencies for Tomcat 8 -->
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-tomcat-integration</artifactId>
       <type>jar</type>
     </dependency>
-
-    <!--
-        Dependencies for deploying into Tomcat7 shared library. 
-    -->
     <dependency>
       <groupId>org.codehaus.btm</groupId>
       <artifactId>btm</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.codehaus.btm</groupId>
       <artifactId>btm-tomcat55-lifecycle</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.jboss.spec.javax.transaction</groupId>
       <artifactId>jboss-transaction-api_1.1_spec</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.jboss.spec.javax.security.jacc</groupId>
       <artifactId>jboss-jacc-api_1.4_spec</artifactId>
     </dependency>
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
-
     <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
       <classifier>wildfly-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
       <classifier>wildfly-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
       <classifier>eap-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
       <classifier>eap-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
-
   </dependencies>
+
   <build>
     <resources>
       <resource>
@@ -220,14 +197,14 @@
                 <!--</log>-->
               <!--</run>-->
             <!--</image>-->
-            <!-- KIE Workbench latest SNAPSHOT & Tomcat7. -->
+            <!-- KIE Workbench & Tomcat 8. -->
             <image>
-              <name>${docker.kie.repository}/kie-wb-tomcat7:${docker.build.kie.tag}</name>
-              <alias>kie-wb-tomcat7-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-wb-tomcat8:${docker.build.kie.tag}</name>
+              <alias>kie-wb-tomcat8-${docker.build.kie.tag}-h2</alias>
               <build>
                 <assembly>
                   <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-tomcat7.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-tomcat8.xml</descriptor>
                 </assembly>
               </build>
               <run>

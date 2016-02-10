@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM tomcat:7.0.61-jre7
+FROM tomcat:8.0.30-jre8
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"

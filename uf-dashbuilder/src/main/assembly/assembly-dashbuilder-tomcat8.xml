@@ -4,7 +4,7 @@
   
   <dependencySets>
     
-    <!-- Required libs for Tomcat7 shared library. -->
+    <!-- Required libs for Tomcat 8 shared library. -->
     <dependencySet>
       <includes>
         <include>org.codehaus.btm:btm</include>
@@ -20,7 +20,7 @@
       <outputDirectory>./tomcat-libs</outputDirectory>
     </dependencySet>
     
-    <!-- Dashbuilder for Tomcat7 -->
+    <!-- Dashbuilder for Tomcat 8 -->
     <dependencySet>
       <includes>
         <include>org.dashbuilder:dashbuilder-distros:war:tomcat7</include>

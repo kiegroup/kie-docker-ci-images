@@ -14,21 +14,18 @@
   <name>UF Dashbuilder :: Docker integration</name>
 
   <dependencies>
-
     <dependency>
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
       <classifier>wildfly8</classifier>
     </dependency>
-
     <dependency>
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
-
     <dependency>
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
@@ -36,49 +33,39 @@
       <classifier>tomcat7</classifier>
     </dependency>
 
-    <!--
-        Dependencies for deploying into Tomcat7 shared library. 
-    -->
+    <!-- Additional dependencies for Tomcat 8 -->
     <dependency>
       <groupId>org.codehaus.btm</groupId>
       <artifactId>btm</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.codehaus.btm</groupId>
       <artifactId>btm-tomcat55-lifecycle</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.jboss.spec.javax.transaction</groupId>
       <artifactId>jboss-transaction-api_1.1_spec</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.jboss.spec.javax.security.jacc</groupId>
       <artifactId>jboss-jacc-api_1.4_spec</artifactId>
     </dependency>
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
-
     <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
@@ -86,7 +73,6 @@
       <classifier>wildfly-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
@@ -94,7 +80,6 @@
       <classifier>wildfly-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
@@ -102,7 +87,6 @@
       <classifier>eap-mysql</classifier>
       <type>tar.gz</type>
     </dependency>
-
     <dependency>
       <groupId>org.kie.docker</groupId>
       <artifactId>kie-jboss-modules</artifactId>
@@ -110,7 +94,6 @@
       <classifier>eap-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -197,13 +180,12 @@
             <!--</image>-->
             <!-- UF Dashbuilder latest SNAPSHOT & Tomcat7. -->
             <image>
-              <name>${docker.kie.repository}/uf-dashbuilder-tomcat7:${docker.build.dashbuilder.tag}</name>
-              <alias>uf-dashbuilder-tomcat7-${docker.build.dashbuilder.tag}</alias>
+              <name>${docker.kie.repository}/uf-dashbuilder-tomcat8:${docker.build.dashbuilder.tag}</name>
+              <alias>uf-dashbuilder-tomcat8-${docker.build.dashbuilder.tag}</alias>
               <build>
                 <assembly>
                   <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat7.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat8.xml</descriptor>
                 </assembly>
               </build>
               <run>
