@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM jboss/wildfly:8.1.0.Final
+FROM jboss/wildfly:10.0.0.Final
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
@@ -7,7 +7,7 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
-LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:webc
+LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:ee7
 
 ####### SYSTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -15,7 +15,7 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### KIE-SERVER & WILDFLY8 CONFIG FILES ############
+####### KIE-SERVER & WILDFLY10 CONFIG FILES ############
 # Latest WAR from Maven repository & Custom Wildfly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
@@ -36,7 +36,7 @@ ADD maven/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.w
 # Work with unpacked WAR archives in WildFly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-server.war.dodeploy && \
-rm -rf $JBOSS_HOME/standalone/deployments/kie-server-archive.war && \
+rm -rf $JBOSS_HOME/standalone/deployments/kie-server-archive.war
 # Set right permissions for jboss user.
 RUN chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \
