@@ -49,11 +49,18 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Defines versions for 3rd party artifacts. Using the kie-platform-bom to make sure the versions are always
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-bom</artifactId>
+        <version>${docker.kie.artifacts.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Defines versions for 3rd party artifacts. Using the kie-third-party-bom to make sure the versions are always
            properly aligned to the ones used in the KIE Platform. -->
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-platform-bom</artifactId>
+        <artifactId>kie-third-party-bom</artifactId>
         <version>${docker.kie.artifacts.version}</version>
         <scope>import</scope>
         <type>pom</type>
