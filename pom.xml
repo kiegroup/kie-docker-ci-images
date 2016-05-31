@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie</groupId>
     <artifactId>kie-parent</artifactId>
-    <version>7.0.0.20160531-004002</version>
+    <version>7.0.0-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
@@ -42,7 +42,7 @@
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.build.dashbuilder.tag>0.5.0.20160531-004002</docker.build.dashbuilder.tag>
+    <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
     <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
