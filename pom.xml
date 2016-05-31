@@ -2,13 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.jboss</groupId>
-    <artifactId>jboss-parent</artifactId>
-    <version>16</version>
+    <groupId>org.kie</groupId>
+    <artifactId>kie-parent</artifactId>
+    <version>7.0.0-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
-  <version>7.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>KIE :: Docker images for CI and testing</name>
 
@@ -36,7 +35,7 @@
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>0.5.0-SNAPSHOT</docker.dashbuilder.artifacts.version>
+    <docker.dashbuilder.artifacts.version>${version.org.dashbuilder}</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
@@ -49,22 +48,16 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Defines versions for all all internal and 3rd party artifacts. Using the kie-platform-bom to make sure
+           the versions are always properly aligned to the ones used in the KIE Platform. -->
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-bom</artifactId>
+        <artifactId>kie-platform-bom</artifactId>
         <version>${docker.kie.artifacts.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- Defines versions for 3rd party artifacts. Using the kie-third-party-bom to make sure the versions are always
-           properly aligned to the ones used in the KIE Platform. -->
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-third-party-bom</artifactId>
-        <version>${docker.kie.artifacts.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
+
       <dependency>
         <groupId>org.jbpm.dashboard</groupId>
         <artifactId>jbpm-dashboard-distributions</artifactId>
