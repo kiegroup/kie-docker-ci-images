@@ -26,4 +26,5 @@ DASHBUILDER_BASE_VERSION=`echo ${DASHBUILDER_VERSION} | cut -c -5`
 echo "Dashbuilder version: $DASHBUILDER_VERSION"
 echo "Base Dashbuilder version: $DASHBUILDER_BASE_VERSION"
 mvn -B -N -e ${ADDITIONAL_MAVEN_ARGS} versions:update-parent -DparentVersion=[${KIE_VERSION}] -DallowSnapshots=true -DgenerateBackupPoms=false
+mvn -B -N -e ${ADDITIONAL_MAVEN_ARGS} versions:update-child-modules -DallowSnapshots=true -DgenerateBackupPoms=false
 sed -i "s/<docker\.build\.dashbuilder\.tag>.*<\/docker\.build\.dashbuilder\.tag>/<docker\.build\.dashbuilder\.tag>${DASHBUILDER_BASE_VERSION}.${TIMESTAMP}<\/docker\.build\.dashbuilder\.tag>/" pom.xml
