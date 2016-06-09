@@ -53,25 +53,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>eap6_4</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>wildfly8</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>tomcat7</classifier>
-    </dependency>
-
-    <dependency>
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server</artifactId>
       <type>war</type>

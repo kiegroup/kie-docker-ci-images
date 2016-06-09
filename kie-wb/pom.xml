@@ -33,25 +33,6 @@
       <classifier>tomcat7</classifier>
     </dependency>
 
-    <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>wildfly8</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>eap6_4</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.jbpm.dashboard</groupId>
-      <artifactId>jbpm-dashboard-distributions</artifactId>
-      <type>war</type>
-      <classifier>tomcat7</classifier>
-    </dependency>
-
     <!-- Additional dependencies for Tomcat 8 -->
     <dependency>
       <groupId>org.kie</groupId>

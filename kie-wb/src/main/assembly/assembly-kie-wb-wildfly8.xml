@@ -11,14 +11,6 @@
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
     </dependencySet>
-    <!-- The Dashboard builder war to include into docker container. -->
-    <dependencySet>
-      <includes>
-        <include>org.jbpm.dashboard:jbpm-dashboard-distributions:war:wildfly8</include>
-      </includes>
-      <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
-    </dependencySet>
     <!-- The MySQL database module to include into docker container. -->
     <dependencySet>
       <includes>

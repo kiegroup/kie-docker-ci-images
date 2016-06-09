@@ -37,15 +37,6 @@
       <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
     </dependencySet>
 
-    <!-- The Dashboard builder war to include into docker container. -->
-    <dependencySet>
-      <includes>
-        <include>org.jbpm.dashboard:jbpm-dashboard-distributions:war:tomcat7</include>
-      </includes>
-      <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
-    </dependencySet>
-  
   </dependencySets>
 
 </assembly>

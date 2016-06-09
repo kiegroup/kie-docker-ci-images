@@ -14,16 +14,12 @@ ENV KIE_CONNECTION_USER sa
 # ENV KIE_CONNECTION_PASSWORD 
 ENV KIE_CONNECTION_DATABASE kie
 LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:tomcat7
-LABEL org.jbpm.jbpm-dashboard.artifact=org.jbpm.dashboard:jbpm-dashboard-distributions:war:tomcat7
 
-####### KIE-WB & DASHBOARD BUILDER WAR ############
+####### KIE-WB WAR ############
 ADD maven/kie-wb.war $CATALINA_HOME/webapps/kie-wb.war
-ADD maven/dashbuilder.war $CATALINA_HOME/webapps/dashbuilder.war
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-wb $CATALINA_HOME/webapps/kie-wb.war && \
-rm -rf $CATALINA_HOME/webapps/kie-wb.war && \
-unzip -q -d $CATALINA_HOME/webapps/dashbuilder $CATALINA_HOME/webapps/dashbuilder.war && \
-rm -rf $CATALINA_HOME/webapps/dashbuilder.war
+rm -rf $CATALINA_HOME/webapps/kie-wb.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

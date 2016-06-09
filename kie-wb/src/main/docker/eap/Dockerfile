@@ -13,7 +13,6 @@ ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
 LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:eap6_4
-LABEL org.jbpm.jbpm-dashboard.artifact=org.jbpm.dashboard:jbpm-dashboard-distributions:war:eap6_4
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -37,9 +36,8 @@ ADD etc/standalone-full-kie-wb.xml $JBOSS_HOME/standalone/configuration/standalo
 ADD etc/start_kie-wb.sh $JBOSS_HOME/bin/start_kie-wb.sh
 ADD etc/update-jpa-config.sh $JBOSS_HOME/bin/update-jpa-config.sh
 
-# Add the kie-wb & Dashboard Builder WAR artifacts from the assembly result.
+# Add the kie-wb WAR artifact from the assembly result.
 ADD maven/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war
-ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war
 
 # Database MySQL and PostgreSQL modules
 ADD maven/modules/kie-eap-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
@@ -48,13 +46,7 @@ ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/laye
 # Work with unpacked WAR archives in EAP, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
-rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-touch $JBOSS_HOME/standalone/deployments/dashbuilder.war.dodeploy && \
-rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-
-# Copy jboss-all.xml for Dashbuilder webapp, it must be deployed after kie-wb.
-ADD etc/jboss-all.xml $JBOSS_HOME/standalone/deployments/dashbuilder.war/META-INF/jboss-all.xml
+rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war
 
 # Set right permissions for jboss user.
 RUN chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
