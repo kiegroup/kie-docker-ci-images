@@ -39,6 +39,10 @@ fi
 # Check if necessary to change the default hibernate dialect for JPA descriptor.
 ./update-jpa-config.sh $JBOSS_HOME/standalone/deployments/kie-wb.war/WEB-INF/classes/META-INF/persistence.xml
 
-# Start Wildfly with some parameters.
-./standalone.sh -b $JBOSS_BIND_ADDRESS -Djboss.kie.connection_url=\"$KIE_CONNECTION_URL\" -Djboss.kie.driver=\"$KIE_CONNECTION_DRIVER\" -Djboss.kie.username=\"$KIE_CONNECTION_USER\" -Djboss.kie.password=\"$KIE_CONNECTION_PASSWORD\" --server-config=standalone-full-kie-wb.xml
+# Start WildFly with some parameters.
+# ActiveMQ Artemis Client by default creates a fixed thread pool with 500 threads. This is way too much
+# and WildFly will fail with java.lang.OutOfMemoryError: unable to create new native thread. Using the property
+# 'activemq.artemis.client.global.thread.pool.max.size' to decrease the pool size.
+# See https://issues.jboss.org/browse/JBEAP-2947 for more info.
+./standalone.sh -b $JBOSS_BIND_ADDRESS -Dactivemq.artemis.client.global.thread.pool.max.size=30 -Djboss.kie.connection_url="$KIE_CONNECTION_URL" -Djboss.kie.driver="$KIE_CONNECTION_DRIVER" -Djboss.kie.username="$KIE_CONNECTION_USER" -Djboss.kie.password="$KIE_CONNECTION_PASSWORD" --server-config=standalone-full-kie-wb.xml
 exit $?

@@ -1,18 +1,18 @@
 ####### BASE ############
-FROM jboss/wildfly:8.1.0.Final
+FROM jboss/wildfly:10.0.0.Final
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
+ENV JAVA_OPTS -Xms256m -Xmx512m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
-ENV KIE_CONNECTION_URL "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+ENV KIE_CONNECTION_URL jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:wildfly8
+LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:wildfly10
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -20,17 +20,17 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### DASHBUILDER & WILDFLY8 CONFIG FILES ############
-# Latest WAR from Maven repository & Custom Wildfly configuration files
+####### DASHBUILDER & WILDFLY 10 CONFIG FILES ############
+# Latest WAR from Maven repository & Custom WildFly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
 # See https://github.com/docker/docker/issues/5110
 # The workaround is doing a chown using root user and then switchback to jboss user.
-# Wildfly custom configuration.
+# WildFly custom configuration.
 ADD etc/dashbuilder-users.properties $JBOSS_HOME/standalone/configuration/dashbuilder-users.properties
 ADD etc/dashbuilder-roles.properties $JBOSS_HOME/standalone/configuration/dashbuilder-roles.properties
 ADD etc/standalone-full-dashbuilder.xml $JBOSS_HOME/standalone/configuration/standalone-full-dashbuilder.xml
-# Custom dashbuilder Wildfly startup scripts.
+# Custom dashbuilder WildFly startup scripts.
 ADD etc/start_dashbuilder.sh $JBOSS_HOME/bin/start_dashbuilder.sh
 # Add the dashbuilder WAR artifact from the assembly result.
 ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war

@@ -7,7 +7,7 @@ Introduction
 This project is used to achieve a lightweight continuous integration system for our daily development. It Dockerizes some KIE applications and runs them in a Docker containers.
 
 Project's modules are:               
-* `kie-jboss-modules` - Generates and assemblies the MySQL and PostgreSQL database modules for both JBoss Wildfly and JBoss EAP                          
+* `kie-jboss-modules` - Generates and assemblies the MySQL and PostgreSQL database modules for WildFly               
 * `kie-wb` - Builds and runs the `KIE Workbench` Docker image with latest build from master branch.
 * `kie-drools-wb` - Builds and runs the `KIE Drools Workbench` Docker image with latest build from master branch.
 * `kie-server` - Builds and runs the `KIE Execution Server` Docker image with latest build from master branch.
@@ -32,7 +32,7 @@ This images are quite different from the official community ones, that you can f
 
 The images from this project are more complex and intended for achieving continuous integration testing purposes, so they have additional features (not included in the community ones) such as:                   
 * They use latest CI builds for all KIE applications, instead of using official `Final` releases
-* There exist a Docker image for each KIE application that runs on: JBoss Wildfly 8, JBoss EAP 6.4 and Tomcat 8 (community official ones only exist for JBoss Wildfly 8)                           
+* There exist a Docker image for each KIE application that runs on WildFly 10 and Tomcat 8
 * Support for external MySQL and PostgreSQL databases                      
 * The web applications for the images are deployed as exploded war files by default
 * Each image contains helper scripts to achieve the different application servers and databases supported with just using Docker command line environment variables                            
@@ -44,7 +44,7 @@ Build process
 -------------
 
 The build process for this project consist of the following steps:                 
-* Build database EAP/Wildfly modules artifacts that will be used for the next Docker images builds (module = `kie-jboss-modules`)                           
+* Build database WildFly modules artifacts that will be used for the next Docker images builds (module = `kie-jboss-modules`)                           
 * For each project's sub-module (`KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server`, `UF Dashbuilder`)               
     * Create Docker images for `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` and `UF Dashbuilder` using latest SNAPSHOT versions from both `master` and `product` branches                                  
     * Push the images into the Docker registry (this step is currently disabled)                                    

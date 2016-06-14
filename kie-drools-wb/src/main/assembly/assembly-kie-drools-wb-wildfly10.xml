@@ -2,9 +2,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <dependencySets>
+    <!-- The war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-drools-wb-distribution-wars:war:eap6_4</include>
+        <include>org.kie:kie-drools-wb-distribution-wars:war:wildfly10</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
@@ -12,20 +13,20 @@
     <!-- The MySQL database module to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie.docker:kie-jboss-modules:tar.gz:eap-mysql</include>
+        <include>org.kie.docker:kie-jboss-modules:tar.gz:wildfly-mysql</include>
       </includes>
       <unpack>false</unpack>
       <outputDirectory>./modules</outputDirectory>
-      <outputFileNameMapping>kie-eap-mysql-module.tar.gz</outputFileNameMapping>
+      <outputFileNameMapping>kie-wildfly-mysql-module.tar.gz</outputFileNameMapping>
     </dependencySet>
     <!-- The PostgreSQL database module to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie.docker:kie-jboss-modules:tar.gz:eap-postgres</include>
+        <include>org.kie.docker:kie-jboss-modules:tar.gz:wildfly-postgres</include>
       </includes>
       <unpack>false</unpack>
       <outputDirectory>./modules</outputDirectory>
-      <outputFileNameMapping>kie-eap-postgres-module.tar.gz</outputFileNameMapping>
+      <outputFileNameMapping>kie-wildfly-postgres-module.tar.gz</outputFileNameMapping>
     </dependencySet>
   </dependencySets>
 
