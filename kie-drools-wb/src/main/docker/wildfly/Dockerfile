@@ -1,18 +1,18 @@
 ####### BASE ############
-FROM jboss/wildfly:8.1.0.Final
+FROM jboss/wildfly:10.0.0.Final
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
+ENV JAVA_OPTS -Xms512m -Xmx1024m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
-ENV KIE_CONNECTION_URL "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+ENV KIE_CONNECTION_URL jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:wildfly8
+LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:wildfly10
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -20,17 +20,17 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### KIE-DROOLS-WB & WILDFLY8 CONFIG FILES ############
-# Latest WAR from Maven repository & Custom Wildfly configuration files
+####### KIE-DROOLS-WB & WILDFLY10 CONFIG FILES ############
+# Latest WAR from Maven repository & Custom WildFly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
 # See https://github.com/docker/docker/issues/5110
 # The workaround is doing a chown using root user and then switchback to jboss user.
-# Wildfly custom configuration.
+# WildFly custom configuration.
 ADD etc/kie-drools-wb-users.properties $JBOSS_HOME/standalone/configuration/kie-drools-wb-users.properties
 ADD etc/kie-drools-wb-roles.properties $JBOSS_HOME/standalone/configuration/kie-drools-wb-roles.properties
 ADD etc/standalone-full-kie-drools-wb.xml $JBOSS_HOME/standalone/configuration/standalone-full-kie-drools-wb.xml
-# Custom kie-drools-wb Wildfly startup scripts.
+# Custom kie-drools-wb WildFly startup scripts.
 ADD etc/start_kie-drools-wb.sh $JBOSS_HOME/bin/start_kie-drools-wb.sh
 ADD etc/update-jpa-config.sh $JBOSS_HOME/bin/update-jpa-config.sh
 # Add the kie-drools-wb WAR artifact from the assembly result.

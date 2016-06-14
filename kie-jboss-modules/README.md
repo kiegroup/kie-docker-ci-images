@@ -1,3 +1,3 @@
-JBoss Wildfly/EAP modules for database drivers
-===============================================
+JBoss WildFly/EAP modules for database drivers
+==============================================
 

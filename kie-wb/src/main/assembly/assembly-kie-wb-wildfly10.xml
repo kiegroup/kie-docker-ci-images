@@ -1,14 +1,15 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  
   <dependencySets>
-    <!-- The Dashbuilder war to include into docker container. -->
+    <!-- The KIE WB war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.dashbuilder:dashbuilder-distros:war:wildfly8</include>
+        <include>org.kie:kie-wb-distribution-wars:war:wildfly10</include>
       </includes>
       <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
+      <outputFileNameMapping>kie-wb.war</outputFileNameMapping>
     </dependencySet>
     <!-- The MySQL database module to include into docker container. -->
     <dependencySet>

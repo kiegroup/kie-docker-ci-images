@@ -39,14 +39,10 @@
         </executions>
         <configuration>
           <descriptors>
-            <!-- JBoss Wildfly - MySQL driver module. -->
+            <!-- JBoss WildFly - MySQL driver module. -->
             <descriptor>src/main/assembly/wildfly/assembly-wildfly-mysql.xml</descriptor>
-            <!-- JBoss Wildfly - PostgreSQL driver module. -->
+            <!-- JBoss WildFly - PostgreSQL driver module. -->
             <descriptor>src/main/assembly/wildfly/assembly-wildfly-postgres.xml</descriptor>
-            <!-- JBoss EAP - MySQL driver module. -->
-            <descriptor>src/main/assembly/eap/assembly-eap-mysql.xml</descriptor>
-            <!-- JBoss EAP - PostgreSQL driver module. -->
-            <descriptor>src/main/assembly/eap/assembly-eap-postgres.xml</descriptor>
           </descriptors>
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>

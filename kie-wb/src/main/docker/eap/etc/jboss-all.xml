@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jboss xmlns="urn:jboss:1.0">
-  <jboss-deployment-dependencies xmlns="urn:jboss:deployment-dependencies:1.0">
-    <dependency name="kie-wb.war" />
-  </jboss-deployment-dependencies>
-</jboss>

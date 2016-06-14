@@ -18,13 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>eap6_4</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-wb-distribution-wars</artifactId>
-      <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -37,13 +31,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>eap6_4</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drools-wb-distribution-wars</artifactId>
-      <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -75,16 +63,8 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
-
-    <dependency>
-      <groupId>org.dashbuilder</groupId>
-      <artifactId>dashbuilder-distros</artifactId>
-      <type>war</type>
-      <classifier>eap6_4</classifier>
-    </dependency>
-
     <dependency>
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>

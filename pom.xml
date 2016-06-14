@@ -31,7 +31,7 @@
 
   <properties>
     <!-- Configurable properties for the build. -->
-    <docker.daemon.rest.url>http://localhost:2375</docker.daemon.rest.url>
+    <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
     <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
@@ -63,14 +63,7 @@
         <artifactId>dashbuilder-distros</artifactId>
         <version>${docker.dashbuilder.artifacts.version}</version>
         <type>war</type>
-        <classifier>wildfly8</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>eap6_4</classifier>
+        <classifier>wildfly10</classifier>
       </dependency>
       <dependency>
         <groupId>org.dashbuilder</groupId>
@@ -100,20 +93,6 @@
         <classifier>wildfly-postgres</classifier>
         <type>tar.gz</type>
       </dependency>
-      <dependency>
-        <groupId>org.kie.docker</groupId>
-        <artifactId>kie-jboss-modules</artifactId>
-        <version>${project.version}</version>
-        <classifier>eap-mysql</classifier>
-        <type>tar.gz</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kie.docker</groupId>
-        <artifactId>kie-jboss-modules</artifactId>
-        <version>${project.version}</version>
-        <classifier>eap-postgres</classifier>
-        <type>tar.gz</type>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -121,9 +100,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.jolokia</groupId>
+          <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.13.3</version>
+          <version>0.15.7</version>
           <configuration>
             <!-- Global configuration. -->
             <dockerHost>${docker.daemon.rest.url}</dockerHost>
