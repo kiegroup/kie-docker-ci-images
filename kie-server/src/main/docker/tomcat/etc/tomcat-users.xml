@@ -37,7 +37,7 @@
   <!-- KIE  Server CUSTOM CONFIGURATION. -->
   <role rolename="manager-gui"/>
   <role rolename="kie-server"/>
-  <user username="admin" password="admin" roles="kie-server" />
-  <user username="kie-server" password="kie-server" roles="kie-server"/>
+  <user username="admin" password="admin" roles="kie-server,rest-all" />
+  <user username="kie-server" password="kie-server" roles="kie-server,rest-all"/>
 
 </tomcat-users>
