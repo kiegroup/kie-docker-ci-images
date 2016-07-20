@@ -32,7 +32,6 @@
   <properties>
     <!-- Configurable properties for the build. -->
     <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
-    <docker.registry>localhost:5000</docker.registry>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
     <docker.dashbuilder.artifacts.version>${version.org.dashbuilder}</docker.dashbuilder.artifacts.version>
@@ -106,7 +105,6 @@
           <configuration>
             <!-- Global configuration. -->
             <dockerHost>${docker.daemon.rest.url}</dockerHost>
-            <registry>${docker.registry}</registry>
             <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
             <authConfig>
               <username/>
