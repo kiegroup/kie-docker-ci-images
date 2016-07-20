@@ -32,8 +32,7 @@
 
   <properties>
     <!-- Configurable properties for the build. -->
-    <docker.daemon.rest.url>http://localhost:2375</docker.daemon.rest.url>
-    <docker.registry>localhost:5000</docker.registry>
+    <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
@@ -127,7 +126,6 @@
           <configuration>
             <!-- Global configuration. -->
             <dockerHost>${docker.daemon.rest.url}</dockerHost>
-            <registry>${docker.registry}</registry>
             <!-- Although no authentication on registry, set empty values. If not, plugin push goal fails. -->
             <authConfig>
               <username/>
