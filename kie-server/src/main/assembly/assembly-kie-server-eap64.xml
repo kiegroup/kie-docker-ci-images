@@ -12,9 +12,4 @@
     </dependencySet>
   </dependencySets>
 
-  <!-- The generated maven site as a webapp. -->
-  <componentDescriptors>
-    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
-  </componentDescriptors>
-  
 </assembly>

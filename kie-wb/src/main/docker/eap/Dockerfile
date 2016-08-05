@@ -1,11 +1,11 @@
 ####### BASE ############
-FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.2
+FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.3
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
+ENV JAVA_OPTS -Xms256m -Xmx1024m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
 ENV KIE_CONNECTION_URL jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 ENV KIE_CONNECTION_DRIVER h2
@@ -45,19 +45,13 @@ ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive
 ADD maven/modules/kie-eap-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
-
 # Work with unpacked WAR archives in EAP, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 unzip -q -d $JBOSS_HOME/standalone/deployments/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/dashbuilder.war.dodeploy && \
-rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/kie-wb-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/kie-wb-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy
+rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war
 
 # Copy jboss-all.xml for Dashbuilder webapp, it must be deployed after kie-wb.
 ADD etc/jboss-all.xml $JBOSS_HOME/standalone/deployments/dashbuilder.war/META-INF/jboss-all.xml

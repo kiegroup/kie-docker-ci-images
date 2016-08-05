@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM jboss/wildfly:8.1.0.Final
+FROM jboss/wildfly:10.0.0.Final
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
@@ -12,7 +12,7 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:wildfly8
+LABEL org.dashbuilder.artifact=org.dashbuilder:dashbuilder-distros:war:wildfly10
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -20,33 +20,28 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### DASHBUILDER & WILDFLY8 CONFIG FILES ############
-# Latest WAR from Maven repository & Custom Wildfly configuration files
+####### DASHBUILDER & WildFly10 CONFIG FILES ############
+# Latest WAR from Maven repository & Custom WildFly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
 # See https://github.com/docker/docker/issues/5110
 # The workaround is doing a chown using root user and then switchback to jboss user.
-# Wildfly custom configuration.
+# WildFly custom configuration.
 ADD etc/dashbuilder-users.properties $JBOSS_HOME/standalone/configuration/dashbuilder-users.properties
 ADD etc/dashbuilder-roles.properties $JBOSS_HOME/standalone/configuration/dashbuilder-roles.properties
 ADD etc/standalone-full-dashbuilder.xml $JBOSS_HOME/standalone/configuration/standalone-full-dashbuilder.xml
-# Custom dashbuilder Wildfly startup scripts.
+# Custom dashbuilder WildFly startup scripts.
 ADD etc/start_dashbuilder.sh $JBOSS_HOME/bin/start_dashbuilder.sh
 # Add the dashbuilder WAR artifact from the assembly result.
 ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war
 # Database MySQL and PostgreSQL modules
 ADD maven/modules/kie-wildfly-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-wildfly-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
 
 # Work with unpacked WAR archives in Wilfly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/dashbuilder.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/uf-dashbuilder-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/uf-dashbuilder-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy && \
 chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \
 chown jboss:jboss $JBOSS_HOME/bin/start_dashbuilder.sh && \

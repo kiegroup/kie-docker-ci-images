@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>16</version>
+    <version>20</version>
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
@@ -46,6 +46,15 @@
     <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
+  <modules>
+    <module>kie-jboss-modules</module>
+    <module>kie-wb</module>
+    <module>kie-drools-wb</module>
+    <module>uf-dashbuilder</module>
+    <module>kie-server</module>
+    <module>kie-artifacts</module>
+  </modules>
+
   <dependencyManagement>
     <dependencies>
       <!-- Defines versions for 3rd party artifacts. Using the kie-platform-bom to make sure the versions are always
@@ -69,7 +78,7 @@
         <artifactId>jbpm-dashboard-distributions</artifactId>
         <version>${docker.kie.artifacts.version}</version>
         <type>war</type>
-        <classifier>wildfly8</classifier>
+        <classifier>wildfly10</classifier>
       </dependency>
       <dependency>
         <groupId>org.jbpm.dashboard</groupId>
@@ -84,7 +93,7 @@
         <artifactId>dashbuilder-distros</artifactId>
         <version>${docker.dashbuilder.artifacts.version}</version>
         <type>war</type>
-        <classifier>wildfly8</classifier>
+        <classifier>wildfly10</classifier>
       </dependency>
       <dependency>
         <groupId>org.dashbuilder</groupId>
@@ -142,17 +151,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.4</version>
-          <configuration>
-            <jarOutputDirectory>${project.build.directory}</jarOutputDirectory>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.jolokia</groupId>
+          <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.13.3</version>
+          <version>0.15.16</version>
           <configuration>
             <!-- Global configuration. -->
             <dockerHost>${docker.daemon.rest.url}</dockerHost>
@@ -168,133 +169,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-dependency-properties</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>properties</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.8</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependencies</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
-
-  <profiles>
-    <!-- All images and deploy artifacts. -->
-    <profile>
-      <id>all</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>all</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>kie-wb</module>
-        <module>kie-drools-wb</module>
-        <module>uf-dashbuilder</module>
-        <module>kie-server</module>
-        <module>kie-artifacts</module>
-      </modules>
-    </profile>
-
-    <!-- KIE Workbench. -->
-    <profile>
-      <id>kie-wb</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-wb</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>kie-wb</module>
-      </modules>
-    </profile>
-
-    <!-- KIE Drools Workbench. -->
-    <profile>
-      <id>kie-drools-wb</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-drools-wb</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>kie-drools-wb</module>
-      </modules>
-    </profile>
-
-    <!-- KIE Execution Server. -->
-    <profile>
-      <id>kie-server</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-server</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>kie-server</module>
-      </modules>
-    </profile>
-
-    <!-- UF Dashbuilder. -->
-    <profile>
-      <id>uf-dashbuilder</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>uf-dashbuilder</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>uf-dashbuilder</module>
-      </modules>
-    </profile>
-
-    <!-- KIE Artifacts deployer module. -->
-    <profile>
-      <id>kie-artifacts</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-artifacts</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-artifacts</module>
-      </modules>
-    </profile>
-
-  </profiles>
 
 </project>

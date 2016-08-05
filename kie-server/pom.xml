@@ -87,51 +87,33 @@
       </resource>
     </resources>
     <plugins>
-      <!-- Generate site report for dependencies for including it into the generated docker image. -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <finalName>kie-server</finalName>
-        </configuration>
-        <executions>
-          <execution>
-            <id>generate-report</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jolokia</groupId>
+        <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <!-- KIE Images. -->
           <images>
-            <!-- KIE Server latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <!-- KIE Server latest SNAPSHOT & WildFly 10.0.0.Final. -->
             <image>
-              <name>${docker.kie.repository}/kie-server-wildfly8:${docker.build.kie.tag}</name>
-              <alias>kie-server-wildfly8-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-server-wildfly10:${docker.build.kie.tag}</name>
+              <alias>kie-server-wildfly10-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly8.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly10.xml</descriptor>
                 </assembly>
               </build>
               <run>
                 <namingStrategy>alias</namingStrategy>
                 <env>
-                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
                   <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
                   <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
                   <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kieserver.wf8.http.port:8080</port>
+                  <port>kieserver.wf10.http.port:8080</port>
                 </ports>
                 <wait>
                   <log>Deployed "kie-server\.war"</log>
@@ -149,8 +131,8 @@
               <name>${docker.kie.repository}/kie-server-eap64:${docker.build.kie.tag}</name>
               <alias>kie-server-eap64-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-eap64.xml</descriptor>
                 </assembly>
               </build>
@@ -182,8 +164,8 @@
               <name>${docker.kie.repository}/kie-server-tomcat7:${docker.build.kie.tag}</name>
               <alias>kie-server-tomcat7-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-tomcat7.xml</descriptor>
                 </assembly>
               </build>
@@ -215,14 +197,14 @@
         </configuration>
         <executions>
           <execution>
-            <id>kieserver-build</id>
+            <id>kie-server-build</id>
             <phase>pre-integration-test</phase>
             <goals>
               <goal>build</goal>
             </goals>
           </execution>
           <execution>
-            <id>kieserver-start</id>
+            <id>kie-server-start</id>
             <phase>post-integration-test</phase>
             <goals>
               <goal>start</goal>

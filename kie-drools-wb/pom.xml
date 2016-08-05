@@ -19,7 +19,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
 
     <dependency>
@@ -126,51 +126,34 @@
     </resources>
 
     <plugins>
-      <!-- Generate site report for dependencies for including it into the generated docker image. -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <finalName>kie-drools-wb</finalName>
-        </configuration>
-        <executions>
-          <execution>
-            <id>generate-report</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jolokia</groupId>
+        <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <!-- KIE Images. -->
           <images>
-            <!-- Drools Workbench latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <!-- Drools Workbench latest SNAPSHOT & WildFly 10.0.0.Final. -->
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-wildfly8:${docker.build.kie.tag}</name>
-              <alias>kie-drools-wb-wildfly8-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-drools-wb-wildfly10:${docker.build.kie.tag}</name>
+              <alias>kie-drools-wb-wildfly10-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly8.xml
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml
                   </descriptor>
                 </assembly>
               </build>
               <run>
                 <namingStrategy>alias</namingStrategy>
                 <env>
-                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
                   <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
                   <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
                   <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kiedroolswb.wf8.http.port:8080</port>
+                  <port>kiedroolswb.wf10.http.port:8080</port>
                 </ports>
                 <wait>
                   <log>Deployed "kie-drools-wb\.war"</log>
@@ -188,8 +171,8 @@
               <name>${docker.kie.repository}/kie-drools-wb-eap64:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-eap64-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-eap64.xml</descriptor>
                 </assembly>
               </build>
@@ -221,12 +204,12 @@
               <name>${docker.kie.repository}/kie-drools-wb-tomcat7:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-tomcat7-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-tomcat7.xml</descriptor>
                 </assembly>
               </build>
-              <!-- Run a Drools Workbench container for Wildfly8. -->
+              <!-- Run a Drools Workbench container for WildFly 10. -->
               <run>
                 <namingStrategy>alias</namingStrategy>
                 <env>
@@ -255,14 +238,14 @@
         </configuration>
         <executions>
           <execution>
-            <id>kiedroolswb-build</id>
+            <id>kie-drools-wb-build</id>
             <phase>pre-integration-test</phase>
             <goals>
               <goal>build</goal>
             </goals>
           </execution>
           <execution>
-            <id>kiedroolswb-start</id>
+            <id>kie-drools-wb-start</id>
             <phase>post-integration-test</phase>
             <goals>
               <goal>start</goal>

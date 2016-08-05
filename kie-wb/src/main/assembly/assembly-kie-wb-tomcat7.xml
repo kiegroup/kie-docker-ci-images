@@ -48,8 +48,4 @@
   
   </dependencySets>
 
-  <componentDescriptors>
-    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
-  </componentDescriptors>
-  
 </assembly>

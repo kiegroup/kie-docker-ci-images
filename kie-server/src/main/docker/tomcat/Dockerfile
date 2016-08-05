@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM tomcat:7.0.61-jre7
+FROM tomcat:7.0.70-jre8
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
@@ -11,11 +11,8 @@ LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:webc
 
 ####### KIE-SERVER & SITE WAR ############
 ADD maven/kie-server.war $CATALINA_HOME/webapps/kie-server.war
-ADD maven/site $CATALINA_HOME/webapps/site
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-server $CATALINA_HOME/webapps/kie-server.war && \
-rm -rf $CATALINA_HOME/webapps/kie-server.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-server-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/kie-server-site.jar
+rm -rf $CATALINA_HOME/webapps/kie-server.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

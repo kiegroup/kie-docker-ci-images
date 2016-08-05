@@ -19,7 +19,7 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
 
     <dependency>
@@ -121,51 +121,33 @@
       </resource>
     </resources>
     <plugins>
-      <!-- Generate site report for dependencies for including it into the generated docker image. -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <finalName>uf-dashbuilder</finalName>
-        </configuration>
-        <executions>
-          <execution>
-            <id>generate-report</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jolokia</groupId>
+        <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <images>
-            <!-- UF Dashbuilder latest SNAPSHOT & Wildfly 8.1.0.Final. -->
+            <!-- UF Dashbuilder latest SNAPSHOT & WildFly 10.0.0.Final. -->
             <image>
-              <name>${docker.kie.repository}/uf-dashbuilder-wildfly8:${docker.build.dashbuilder.tag}</name>
-              <alias>uf-dashbuilder-wildfly8-${docker.build.dashbuilder.tag}</alias>
+              <name>${docker.kie.repository}/uf-dashbuilder-wildfly10:${docker.build.dashbuilder.tag}</name>
+              <alias>uf-dashbuilder-wildfly10-${docker.build.dashbuilder.tag}</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly8.xml
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly10.xml
                   </descriptor>
                 </assembly>
               </build>
               <run>
                 <namingStrategy>alias</namingStrategy>
                 <env>
-                  <KIE_CONNECTION_URL>"jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
                   <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
                   <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
                   <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>dashbuilder.wf8.http.port:8080</port>
+                  <port>dashbuilder.wf10.http.port:8080</port>
                 </ports>
                 <wait>
                   <log>Deployed "dashbuilder\.war"</log>
@@ -183,8 +165,8 @@
               <name>${docker.kie.repository}/uf-dashbuilder-eap64:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-eap64-${docker.build.dashbuilder.tag}</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-eap64.xml
                   </descriptor>
                 </assembly>
@@ -217,8 +199,8 @@
               <name>${docker.kie.repository}/uf-dashbuilder-tomcat7:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-tomcat7-${docker.build.dashbuilder.tag}</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat7.xml
                   </descriptor>
                 </assembly>

@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.2
+FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.3
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
@@ -30,7 +30,7 @@ echo "jboss:jboss" | chpasswd
 ADD etc/dashbuilder-users.properties $JBOSS_HOME/standalone/configuration/dashbuilder-users.properties
 ADD etc/dashbuilder-roles.properties $JBOSS_HOME/standalone/configuration/dashbuilder-roles.properties
 ADD etc/standalone-full-dashbuilder.xml $JBOSS_HOME/standalone/configuration/standalone-full-dashbuilder.xml
-# Custom dashbuilder Wildfly startup scripts.
+# Custom dashbuilder WildFly startup scripts.
 ADD etc/start_dashbuilder.sh $JBOSS_HOME/bin/start_dashbuilder.sh
 
 # Add the dashbuilder WAR artifact from the assembly result.
@@ -39,16 +39,10 @@ ADD maven/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive
 ADD maven/modules/kie-eap-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 
-# The project site report for the build
-ADD maven/site $JBOSS_HOME/standalone/deployments/site.war
-
 # Work with unpacked WAR archives in Wilfly, so other images can override webapp files (such as persistence.xml,etc)
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/dashbuilder.war $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/dashbuilder.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/dashbuilder-archive.war && \
-unzip -q -d $JBOSS_HOME/standalone/deployments/site.war $JBOSS_HOME/standalone/deployments/site.war/uf-dashbuilder-site.jar && \
-rm -rf $JBOSS_HOME/standalone/deployments/site.war/uf-dashbuilder-site.jar && \
-touch $JBOSS_HOME/standalone/deployments/site.war.dodeploy && \
 chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \
 chown jboss:jboss $JBOSS_HOME/bin/start_dashbuilder.sh && \

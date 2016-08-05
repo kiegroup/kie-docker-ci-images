@@ -24,7 +24,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -43,7 +43,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -62,7 +62,7 @@
       <groupId>org.jbpm.dashboard</groupId>
       <artifactId>jbpm-dashboard-distributions</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.jbpm.dashboard</groupId>
@@ -94,7 +94,7 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>wildfly8</classifier>
+      <classifier>wildfly10</classifier>
     </dependency>
 
     <dependency>

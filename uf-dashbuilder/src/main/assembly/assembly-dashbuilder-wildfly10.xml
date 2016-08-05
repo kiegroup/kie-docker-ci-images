@@ -5,7 +5,7 @@
     <!-- The Dashbuilder war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.dashbuilder:dashbuilder-distros:war:wildfly8</include>
+        <include>org.dashbuilder:dashbuilder-distros:war:wildfly10</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>
@@ -30,9 +30,4 @@
     </dependencySet>
   </dependencySets>
 
-  <!-- The generated maven site as a webapp. -->
-  <componentDescriptors>
-    <componentDescriptor>${pom.basedir}/src/main/assembly/assembly-site.xml</componentDescriptor>
-  </componentDescriptors>
-  
 </assembly>

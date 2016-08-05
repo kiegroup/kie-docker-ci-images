@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM tomcat:7.0.61-jre7
+FROM tomcat:7.0.70-jre8
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
@@ -17,12 +17,9 @@ LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war
 
 ####### KIE-DROOLS-WB & SITE WAR ############
 ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war
-ADD maven/site $CATALINA_HOME/webapps/site
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-drools-wb $CATALINA_HOME/webapps/kie-drools-wb.war && \
-rm -rf $CATALINA_HOME/webapps/kie-drools-wb.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-drools-wb-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/kie-drools-wb-site.jar
+rm -rf $CATALINA_HOME/webapps/kie-drools-wb.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

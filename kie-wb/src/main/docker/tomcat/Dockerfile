@@ -1,11 +1,11 @@
 ####### BASE ############
-FROM tomcat:7.0.61-jre7
+FROM tomcat:7.0.70-jre8
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
+ENV JAVA_OPTS -Xms512m -Xmx1024m
 ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
 ENV KIE_CONNECTION_URL jdbc:h2:file:~/jbpm
 ENV KIE_CONNECTION_DRIVER h2
@@ -19,14 +19,11 @@ LABEL org.jbpm.jbpm-dashboard.artifact=org.jbpm.dashboard:jbpm-dashboard-distrib
 ####### KIE-WB & DASHBOARD BUILDER & SITE WAR ############
 ADD maven/kie-wb.war $CATALINA_HOME/webapps/kie-wb.war
 ADD maven/dashbuilder.war $CATALINA_HOME/webapps/dashbuilder.war
-ADD maven/site $CATALINA_HOME/webapps/site
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-wb $CATALINA_HOME/webapps/kie-wb.war && \
 rm -rf $CATALINA_HOME/webapps/kie-wb.war && \
 unzip -q -d $CATALINA_HOME/webapps/dashbuilder $CATALINA_HOME/webapps/dashbuilder.war && \
-rm -rf $CATALINA_HOME/webapps/dashbuilder.war && \
-unzip -q -d $CATALINA_HOME/webapps/site $CATALINA_HOME/webapps/site/kie-wb-site.jar && \
-rm -rf $CATALINA_HOME/webapps/site/kie-wb-site.jar
+rm -rf $CATALINA_HOME/webapps/dashbuilder.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

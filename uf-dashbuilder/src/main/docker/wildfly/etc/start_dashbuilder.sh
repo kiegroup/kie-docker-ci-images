@@ -36,6 +36,6 @@ if [ -n "$POSTGRES_PORT_5432_TCP_ADDR" ] &&  [ -n "$POSTGRES_PORT_5432_TCP_PORT"
     export KIE_CONNECTION_PASSWORD="$POSTGRES_ENV_POSTGRES_PASSWORD"
 fi
 
-# Start Wildfly with some parameters.
-./standalone.sh -b $JBOSS_BIND_ADDRESS -Djboss.kie.connection_url=\"$KIE_CONNECTION_URL\" -Djboss.kie.driver=\"$KIE_CONNECTION_DRIVER\" -Djboss.kie.username=\"$KIE_CONNECTION_USER\" -Djboss.kie.password=\"$KIE_CONNECTION_PASSWORD\" --server-config=standalone-full-dashbuilder.xml
+# Start WildFly with some parameters.
+./standalone.sh -b $JBOSS_BIND_ADDRESS -Djboss.kie.connection_url="$KIE_CONNECTION_URL" -Djboss.kie.driver="$KIE_CONNECTION_DRIVER" -Djboss.kie.username="$KIE_CONNECTION_USER" -Djboss.kie.password="$KIE_CONNECTION_PASSWORD" --server-config=standalone-full-dashbuilder.xml
 exit $?
