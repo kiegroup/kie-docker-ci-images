@@ -106,7 +106,7 @@
       </plugin>
 
       <plugin>
-        <groupId>org.jolokia</groupId>
+        <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <!-- KIE Images. -->
@@ -116,8 +116,8 @@
               <name>${docker.kie.repository}/kie-server-wildfly8:${docker.build.kie.tag}</name>
               <alias>kie-server-wildfly8-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly8.xml</descriptor>
                 </assembly>
               </build>
@@ -149,8 +149,8 @@
               <name>${docker.kie.repository}/kie-server-eap64:${docker.build.kie.tag}</name>
               <alias>kie-server-eap64-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-eap64.xml</descriptor>
                 </assembly>
               </build>
@@ -182,8 +182,8 @@
               <name>${docker.kie.repository}/kie-server-tomcat7:${docker.build.kie.tag}</name>
               <alias>kie-server-tomcat7-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-tomcat7.xml</descriptor>
                 </assembly>
               </build>

@@ -150,9 +150,9 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.jolokia</groupId>
+          <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.13.3</version>
+          <version>0.15.16</version>
           <configuration>
             <!-- Global configuration. -->
             <dockerHost>${docker.daemon.rest.url}</dockerHost>
