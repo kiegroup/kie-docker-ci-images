@@ -19,13 +19,6 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>wildfly10</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>org.dashbuilder</groupId>
-      <artifactId>dashbuilder-distros</artifactId>
-      <type>war</type>
       <classifier>eap6_4</classifier>
     </dependency>
 
@@ -126,40 +119,6 @@
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <images>
-            <!-- UF Dashbuilder latest SNAPSHOT & WildFly 10.0.0.Final. -->
-            <image>
-              <name>${docker.kie.repository}/uf-dashbuilder-wildfly10:${docker.build.dashbuilder.tag}</name>
-              <alias>uf-dashbuilder-wildfly10-${docker.build.dashbuilder.tag}</alias>
-              <build>
-                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly10.xml
-                  </descriptor>
-                </assembly>
-              </build>
-              <run>
-                <namingStrategy>alias</namingStrategy>
-                <env>
-                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
-                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
-                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
-                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
-                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
-                </env>
-                <ports>
-                  <port>dashbuilder.wf10.http.port:8080</port>
-                </ports>
-                <wait>
-                  <log>Deployed "dashbuilder\.war"</log>
-                  <time>${docker.run.timeout}</time>
-                </wait>
-                <log>
-                  <prefix>DEMO</prefix>
-                  <date>ISO8601</date>
-                  <color>blue</color>
-                </log>
-              </run>
-            </image>
             <!-- UF Dashbuilder latest SNAPSHOT & JBoss EAP 6.4. -->
             <image>
               <name>${docker.kie.repository}/uf-dashbuilder-eap64:${docker.build.dashbuilder.tag}</name>

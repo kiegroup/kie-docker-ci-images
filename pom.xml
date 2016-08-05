@@ -93,13 +93,6 @@
         <artifactId>dashbuilder-distros</artifactId>
         <version>${docker.dashbuilder.artifacts.version}</version>
         <type>war</type>
-        <classifier>wildfly10</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
         <classifier>eap6_4</classifier>
       </dependency>
       <dependency>
