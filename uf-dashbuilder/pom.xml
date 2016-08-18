@@ -168,7 +168,7 @@
                   <port>dashbuilder.wf8.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "dashbuilder\.war"</log>
+                  <log>Deployed "dashbuilder.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -202,7 +202,7 @@
                   <port>dashbuilder.eap64.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "dashbuilder\.war"</log>
+                  <log>Deployed "dashbuilder.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -237,7 +237,7 @@
                   <port>dashbuilder.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/dashbuilder has finished in</log>
+                  <log>Deployment of web application directory /usr/local/tomcat/webapps/dashbuilder has finished in</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>

@@ -194,7 +194,7 @@
                   <port>kiewb.wf8.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-wb\.war"</log>
+                  <log>Deployed "kie-wb.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -227,7 +227,7 @@
                   <port>kiewb.eap64.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-wb\.war"</log>
+                  <log>Deployed "kie-wb.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -261,7 +261,7 @@
                   <port>kiewb.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-wb has finished in</log>
+                  <log>Deployment of web application directory /usr/local/tomcat/webapps/kie-wb has finished in</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>

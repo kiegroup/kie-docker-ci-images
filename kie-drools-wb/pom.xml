@@ -173,7 +173,7 @@
                   <port>kiedroolswb.wf8.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <log>Deployed "kie-drools-wb.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -206,7 +206,7 @@
                   <port>kiedroolswb.eap64.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <log>Deployed "kie-drools-wb.war"</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -241,7 +241,7 @@
                   <port>kiedroolswb.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-drools-wb has finished in</log>
+                  <log>Deployment of web application directory /usr/local/tomca/webapps/kie-drools-wb has finished in</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
