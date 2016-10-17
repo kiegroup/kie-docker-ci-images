@@ -4,6 +4,9 @@ FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.3
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
+####### LOCALE ############
+ENV LANG en_US.UTF-8
+
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
