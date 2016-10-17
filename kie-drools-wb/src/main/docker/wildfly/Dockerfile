@@ -4,6 +4,9 @@ FROM jboss/wildfly:10.0.0.Final
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
 
+####### LOCALE ############
+ENV LANG en_US.UTF-8
+
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -Xms512m -Xmx1024m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
