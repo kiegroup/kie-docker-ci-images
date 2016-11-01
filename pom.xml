@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
-  <version>6.5.0-SNAPSHOT</version>
+  <version>6.5.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>KIE :: Docker images for CI and testing</name>
 
@@ -42,7 +42,7 @@
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.build.dashbuilder.tag>0.5.0.SNAPSHOT</docker.build.dashbuilder.tag>
+    <docker.build.dashbuilder.tag>0.5.1.SNAPSHOT</docker.build.dashbuilder.tag>
     <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
