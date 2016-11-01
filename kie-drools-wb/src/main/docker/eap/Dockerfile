@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.3
+FROM ce-registry.usersys.redhat.com/jboss-eap-6/eap64:1.4
 
 ####### MAINTAINER ############
 MAINTAINER "Roger Martinez" "romartin@redhat.com"
