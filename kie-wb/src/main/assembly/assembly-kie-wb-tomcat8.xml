@@ -31,7 +31,7 @@
     <!-- KIE WB for Tomcat 8 -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-wb-distribution-wars:war:tomcat7</include>
+        <include>org.kie:kie-wb-distribution-wars:war:tomcat8</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-wb.war</outputFileNameMapping>

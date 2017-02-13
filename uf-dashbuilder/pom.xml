@@ -24,7 +24,7 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>tomcat7</classifier>
+      <classifier>tomcat8</classifier>
     </dependency>
 
     <!-- Additional dependencies for Tomcat 8 -->
@@ -122,7 +122,7 @@
                 </log>
               </run>
             </image>
-            <!-- UF Dashbuilder latest SNAPSHOT & Tomcat7. -->
+            <!-- UF Dashbuilder latest SNAPSHOT & Tomcat8. -->
             <image>
               <name>${docker.kie.repository}/uf-dashbuilder-tomcat8:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-tomcat8-${docker.build.dashbuilder.tag}</alias>

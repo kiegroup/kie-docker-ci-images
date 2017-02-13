@@ -69,7 +69,7 @@
         <artifactId>dashbuilder-distros</artifactId>
         <version>${docker.dashbuilder.artifacts.version}</version>
         <type>war</type>
-        <classifier>tomcat7</classifier>
+        <classifier>tomcat8</classifier>
       </dependency>
       <dependency>
         <groupId>postgresql</groupId>

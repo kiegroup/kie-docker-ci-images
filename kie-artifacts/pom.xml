@@ -24,7 +24,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>tomcat7</classifier>
+      <classifier>tomcat8</classifier>
     </dependency>
 
     <dependency>
@@ -37,7 +37,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>tomcat7</classifier>
+      <classifier>tomcat8</classifier>
     </dependency>
 
     <dependency>
@@ -69,7 +69,7 @@
       <groupId>org.dashbuilder</groupId>
       <artifactId>dashbuilder-distros</artifactId>
       <type>war</type>
-      <classifier>tomcat7</classifier>
+      <classifier>tomcat8</classifier>
     </dependency>
 
   </dependencies>

@@ -23,7 +23,7 @@
     <!-- Dashbuilder for Tomcat 8 -->
     <dependencySet>
       <includes>
-        <include>org.dashbuilder:dashbuilder-distros:war:tomcat7</include>
+        <include>org.dashbuilder:dashbuilder-distros:war:tomcat8</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>dashbuilder.war</outputFileNameMapping>

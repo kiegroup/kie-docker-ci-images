@@ -24,7 +24,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb-distribution-wars</artifactId>
       <type>war</type>
-      <classifier>tomcat7</classifier>
+      <classifier>tomcat8</classifier>
     </dependency>
 
     <!-- Additional dependencies for Tomcat 8 -->
