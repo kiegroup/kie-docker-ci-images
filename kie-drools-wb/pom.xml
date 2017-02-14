@@ -26,6 +26,12 @@
       <type>war</type>
       <classifier>tomcat8</classifier>
     </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drools-wb-distribution-wars</artifactId>
+      <type>war</type>
+      <classifier>eap7</classifier>
+    </dependency>
     <!-- Additional dependencies for Tomcat 8 -->
     <dependency>
       <groupId>org.kie</groupId>
@@ -75,6 +81,18 @@
       <classifier>wildfly-postgres</classifier>
       <type>tar.gz</type>
     </dependency>
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>eap-mysql</classifier>
+      <type>tar.gz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.docker</groupId>
+      <artifactId>kie-jboss-modules</artifactId>
+      <classifier>eap-postgres</classifier>
+      <type>tar.gz</type>
+    </dependency>
 
   </dependencies>
 
@@ -115,6 +133,40 @@
                 </env>
                 <ports>
                   <port>kiedroolswb.wf10.http.port:8080</port>
+                </ports>
+                <wait>
+                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <time>${docker.run.timeout}</time>
+                </wait>
+                <log>
+                  <prefix>DEMO</prefix>
+                  <date>ISO8601</date>
+                  <color>blue</color>
+                </log>
+              </run>
+            </image>
+            <!--Drools Workbench & EAP 7-->
+            <image>
+              <name>${docker.kie.repository}/kie-drools-wb-eap7:${docker.build.kie.tag}</name>
+              <alias>kie-drools-wb-eap7-${docker.build.kie.tag}-h2</alias>
+              <build>
+                <assembly>
+                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-eap7.xml
+                  </descriptor>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
+                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
+                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
+                  <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
+                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
+                </env>
+                <ports>
+                  <port>kiedroolswb.eap7.http.port:8080</port>
                 </ports>
                 <wait>
                   <log>Deployed "kie-drools-wb\.war"</log>
