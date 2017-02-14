@@ -92,6 +92,21 @@
         <classifier>wildfly-postgres</classifier>
         <type>tar.gz</type>
       </dependency>
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <classifier>eap-mysql</classifier>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.docker</groupId>
+        <artifactId>kie-jboss-modules</artifactId>
+        <version>${project.version}</version>
+        <classifier>eap-postgres</classifier>
+        <type>tar.gz</type>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
