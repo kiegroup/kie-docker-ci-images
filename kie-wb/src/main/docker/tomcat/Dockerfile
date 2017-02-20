@@ -16,7 +16,7 @@ ENV KIE_CONNECTION_USER sa
 # Empty password by default
 # ENV KIE_CONNECTION_PASSWORD 
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:tomcat8
+LABEL org.kie.kie-wb.artifact=org.kie:kie-wb:war:tomcat8
 
 ####### KIE-WB WAR ############
 ADD maven/kie-wb.war $CATALINA_HOME/webapps/kie-wb.war

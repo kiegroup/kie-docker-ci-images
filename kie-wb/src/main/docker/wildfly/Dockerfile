@@ -15,7 +15,7 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-wb.artifact=org.kie:kie-wb-distribution-wars:war:wildfly10
+LABEL org.kie.kie-wb.artifact=org.kie:kie-wb:war:wildfly10
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
