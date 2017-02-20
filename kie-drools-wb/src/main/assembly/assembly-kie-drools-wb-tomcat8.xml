@@ -31,7 +31,7 @@
     <!-- Drools WB for Tomcat 8 -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-drools-wb-distribution-wars:war:tomcat8</include>
+        <include>org.kie:kie-drools-wb:war:tomcat8</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>

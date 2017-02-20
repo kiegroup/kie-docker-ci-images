@@ -16,19 +16,19 @@
   <dependencies>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kie-wb-distribution-wars</artifactId>
+      <artifactId>kie-wb</artifactId>
       <type>war</type>
       <classifier>wildfly10</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kie-wb-distribution-wars</artifactId>
+      <artifactId>kie-wb</artifactId>
       <type>war</type>
       <classifier>tomcat8</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kie-wb-distribution-wars</artifactId>
+      <artifactId>kie-wb</artifactId>
       <type>war</type>
       <classifier>eap7</classifier>
     </dependency>

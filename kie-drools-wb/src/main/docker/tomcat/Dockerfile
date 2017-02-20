@@ -16,7 +16,7 @@ ENV KIE_CONNECTION_USER sa
 # Empty password by default
 # ENV KIE_CONNECTION_PASSWORD 
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb-distribution-wars:war:tomcat8
+LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb:war:tomcat8
 
 ####### KIE-DROOLS-WB WAR ############
 ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war
