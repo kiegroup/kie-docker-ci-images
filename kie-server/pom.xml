@@ -183,7 +183,7 @@
                   <port>kieserver.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory \/usr\/local\/tomcat\/webapps\/kie-server has finished in</log>
+                  <log>Deployment of web application directory /usr/local/tomcat/webapps/kie-server has finished in</log>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
