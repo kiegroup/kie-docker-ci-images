@@ -143,7 +143,10 @@
                   <port>dashbuilder.eap64.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "dashbuilder\.war"</log>
+                  <http>
+                    <url>http://localhost:${dashbuilder.eap64.http.port}/dashbuilder</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -178,7 +181,10 @@
                   <port>dashbuilder.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory /usr/local/tomcat/webapps/dashbuilder has finished in</log>
+                  <http>
+                    <url>http://localhost:${dashbuilder.t7.http.port}/dashbuilder</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>

@@ -116,7 +116,10 @@
                   <port>kieserver.wf10.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-server\.war"</log>
+                  <http>
+                    <url>http://localhost:${kieserver.wf10.http.port}/kie-server</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -149,7 +152,10 @@
                   <port>kieserver.eap64.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-server\.war"</log>
+                  <http>
+                    <url>http://localhost:${kieserver.eap64.http.port}/kie-server</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -183,7 +189,10 @@
                   <port>kieserver.t7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory /usr/local/tomcat/webapps/kie-server has finished in</log>
+                  <http>
+                    <url>http://localhost:${kieserver.t7.http.port}/kie-server</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
