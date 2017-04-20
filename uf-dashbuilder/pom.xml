@@ -95,8 +95,7 @@
               <build>
                 <assembly>
                   <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly10.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly10.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -112,7 +111,10 @@
                   <port>dashbuilder.wf10.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "dashbuilder\.war"</log>
+                  <http>
+                    <url>http://localhost:${dashbuilder.wf10.http.port}/dashbuilder</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -143,10 +145,13 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>dashbuilder.t7.http.port:8080</port>
+                  <port>dashbuilder.t8.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory /usr/local/tomcat/webapps/dashbuilder has finished in</log>
+                  <http>
+                    <url>http://localhost:${dashbuilder.t8.http.port}/dashbuilder</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>

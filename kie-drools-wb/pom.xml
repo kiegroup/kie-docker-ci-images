@@ -135,7 +135,10 @@
                   <port>kiedroolswb.wf10.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <http>
+                    <url>http://localhost:${kiedroolswb.wf10.http.port}/kie-drools-wb</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -169,7 +172,10 @@
                   <port>kiedroolswb.eap7.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployed "kie-drools-wb\.war"</log>
+                  <http>
+                    <url>http://localhost:${kiedroolswb.eap7.http.port}/kie-drools-wb</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
@@ -200,10 +206,13 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kiedroolswb.t7.http.port:8080</port>
+                  <port>kiedroolswb.t8.http.port:8080</port>
                 </ports>
                 <wait>
-                  <log>Deployment of web application directory /usr/local/tomcat/webapps/kie-drools-wb has finished in</log>
+                  <http>
+                    <url>http://localhost:${kiedroolswb.t8.http.port}/kie-drools-wb</url>
+                    <method>GET</method>
+                  </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
