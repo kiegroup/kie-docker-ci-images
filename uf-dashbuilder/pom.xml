@@ -93,8 +93,8 @@
               <name>${docker.kie.repository}/uf-dashbuilder-wildfly10:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-wildfly10-${docker.build.dashbuilder.tag}</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-wildfly10.xml</descriptor>
                 </assembly>
               </build>
@@ -129,8 +129,8 @@
               <name>${docker.kie.repository}/uf-dashbuilder-tomcat8:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-tomcat8-${docker.build.dashbuilder.tag}</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat8.xml</descriptor>
                 </assembly>
               </build>

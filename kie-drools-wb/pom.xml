@@ -116,10 +116,9 @@
               <name>${docker.kie.repository}/kie-drools-wb-wildfly10:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-wildfly10-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -153,10 +152,9 @@
               <name>${docker.kie.repository}/kie-drools-wb-eap7:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-eap7-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-eap7.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-eap7.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -190,8 +188,8 @@
               <name>${docker.kie.repository}/kie-drools-wb-tomcat8:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-tomcat8-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-tomcat8.xml</descriptor>
                 </assembly>
               </build>
