@@ -142,7 +142,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-drools-wb-wildfly10</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
@@ -179,7 +179,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-drools-wb-eap7</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
@@ -216,7 +216,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-drools-wb-tomcat8</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>

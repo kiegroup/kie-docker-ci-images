@@ -109,7 +109,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-server-wildfly10</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
@@ -145,7 +145,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-server-eap7</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
@@ -182,7 +182,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>kie-server-tomcat8</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
