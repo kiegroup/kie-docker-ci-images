@@ -84,8 +84,8 @@
               <name>${docker.kie.repository}/kie-server-wildfly10:${docker.build.kie.tag}</name>
               <alias>kie-server-wildfly10-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly10.xml</descriptor>
                 </assembly>
               </build>
@@ -120,8 +120,8 @@
               <name>${docker.kie.repository}/kie-server-eap7:${docker.build.kie.tag}</name>
               <alias>kie-server-eap7-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-eap7.xml</descriptor>
                 </assembly>
               </build>
@@ -156,8 +156,8 @@
               <name>${docker.kie.repository}/kie-server-tomcat8:${docker.build.kie.tag}</name>
               <alias>kie-server-tomcat8-${docker.build.kie.tag}-h2</alias>
               <build>
+                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                   <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-tomcat8.xml</descriptor>
                 </assembly>
               </build>
