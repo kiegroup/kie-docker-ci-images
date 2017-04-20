@@ -118,7 +118,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>dashbuilder-wildfly10</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
@@ -155,7 +155,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>DEMO</prefix>
+                  <prefix>dashbuilder-tomcat8</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
