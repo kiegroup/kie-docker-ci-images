@@ -126,8 +126,7 @@
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-eap64.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-eap64.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -163,8 +162,7 @@
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat7.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-dashbuilder-tomcat7.xml</descriptor>
                 </assembly>
               </build>
               <run>

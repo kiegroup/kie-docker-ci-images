@@ -139,8 +139,7 @@
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml
-                  </descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml</descriptor>
                 </assembly>
               </build>
               <run>
