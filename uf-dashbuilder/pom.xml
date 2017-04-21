@@ -88,7 +88,6 @@
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
           <images>
-            <!-- UF Dashbuilder latest SNAPSHOT & WildFly 10 -->
             <image>
               <name>${docker.kie.repository}/uf-dashbuilder-wildfly10:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-wildfly10-${docker.build.dashbuilder.tag}</alias>
@@ -124,7 +123,6 @@
                 </log>
               </run>
             </image>
-            <!-- UF Dashbuilder latest SNAPSHOT & Tomcat8. -->
             <image>
               <name>${docker.kie.repository}/uf-dashbuilder-tomcat8:${docker.build.dashbuilder.tag}</name>
               <alias>uf-dashbuilder-tomcat8-${docker.build.dashbuilder.tag}</alias>

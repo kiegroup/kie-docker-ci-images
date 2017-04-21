@@ -111,9 +111,7 @@
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
-          <!-- KIE Images. -->
           <images>
-            <!-- KIE Workbench latest SNAPSHOT & WildFly 10 -->
             <image>
               <name>${docker.kie.repository}/kie-wb-wildfly10:${docker.build.kie.tag}</name>
               <alias>kie-wb-wildfly10-${docker.build.kie.tag}-h2</alias>
@@ -149,7 +147,6 @@
                 </log>
               </run>
             </image>
-            <!-- KIE Workbench latest SNAPSHOT & EAP7 -->
             <image>
               <name>${docker.kie.repository}/kie-wb-eap7:${docker.build.kie.tag}</name>
               <alias>kie-wb-eap7-${docker.build.kie.tag}-h2</alias>
@@ -185,7 +182,6 @@
                 </log>
               </run>
             </image>
-            <!-- KIE Workbench & Tomcat 8. -->
             <image>
               <name>${docker.kie.repository}/kie-wb-tomcat8:${docker.build.kie.tag}</name>
               <alias>kie-wb-tomcat8-${docker.build.kie.tag}-h2</alias>
