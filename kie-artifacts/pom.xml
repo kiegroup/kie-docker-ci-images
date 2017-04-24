@@ -71,20 +71,6 @@
       <type>war</type>
       <classifier>webc</classifier>
     </dependency>
-
-    <dependency>
-      <groupId>org.dashbuilder</groupId>
-      <artifactId>dashbuilder-distros</artifactId>
-      <type>war</type>
-      <classifier>wildfly10</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.dashbuilder</groupId>
-      <artifactId>dashbuilder-distros</artifactId>
-      <type>war</type>
-      <classifier>tomcat8</classifier>
-    </dependency>
-
   </dependencies>
 
   <build>

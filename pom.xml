@@ -34,14 +34,12 @@
     <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>${version.org.dashbuilder}</docker.dashbuilder.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.build.dashbuilder.tag>${docker.dashbuilder.artifacts.version}</docker.build.dashbuilder.tag>
     <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
@@ -57,20 +55,6 @@
         <scope>import</scope>
       </dependency>
 
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>wildfly10</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>tomcat8</classifier>
-      </dependency>
       <dependency>
         <groupId>postgresql</groupId>
         <artifactId>postgresql</artifactId>
@@ -179,7 +163,6 @@
         <module>kie-jboss-modules</module>
         <module>kie-wb</module>
         <module>kie-drools-wb</module>
-        <module>uf-dashbuilder</module>
         <module>kie-server</module>
         <module>kie-artifacts</module>
       </modules>
@@ -227,21 +210,6 @@
       <modules>
         <module>kie-jboss-modules</module>
         <module>kie-server</module>
-      </modules>
-    </profile>
-
-    <!-- UF Dashbuilder. -->
-    <profile>
-      <id>uf-dashbuilder</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>uf-dashbuilder</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>uf-dashbuilder</module>
       </modules>
     </profile>
 
