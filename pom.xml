@@ -35,14 +35,13 @@
     <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
     <docker.kie.repository>jboss-kie</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
-    <docker.dashbuilder.artifacts.version>0.5.1-SNAPSHOT</docker.dashbuilder.artifacts.version>
+
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>
 
     <!-- Properties for internal use. -->
     <maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
     <docker.build.kie.tag>${docker.kie.artifacts.version}</docker.build.kie.tag>
-    <docker.build.dashbuilder.tag>0.5.1.SNAPSHOT</docker.build.dashbuilder.tag>
     <docker.run.timeout>120000</docker.run.timeout>
   </properties>
 
@@ -50,7 +49,6 @@
     <module>kie-jboss-modules</module>
     <module>kie-wb</module>
     <module>kie-drools-wb</module>
-    <module>uf-dashbuilder</module>
     <module>kie-server</module>
     <module>kie-artifacts</module>
   </modules>
@@ -88,20 +86,6 @@
         <classifier>tomcat7</classifier>
       </dependency>
 
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>eap6_4</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.dashbuilder</groupId>
-        <artifactId>dashbuilder-distros</artifactId>
-        <version>${docker.dashbuilder.artifacts.version}</version>
-        <type>war</type>
-        <classifier>tomcat7</classifier>
-      </dependency>
       <dependency>
         <groupId>postgresql</groupId>
         <artifactId>postgresql</artifactId>

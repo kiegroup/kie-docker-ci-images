@@ -11,7 +11,6 @@ Project's modules are:
 * `kie-wb` - Builds and runs the `KIE Workbench` Docker image with latest build from master branch.
 * `kie-drools-wb` - Builds and runs the `KIE Drools Workbench` Docker image with latest build from master branch.
 * `kie-server` - Builds and runs the `KIE Execution Server` Docker image with latest build from master branch.
-* `uf-dashbuilder` - Builds and runs the `UF Dashbuilder` Docker image with latest build from master branch.
 * `kie-artifacts` - Deploy all the Maven artifacts used for all the previous applications into an specified local filesystem path, were they can be later consumed
 
 The integration between Maven and Docker is done using the `docker-maven-plugin` that you can find at [GitHub](https://github.com/rhuss/docker-maven-plugin).
@@ -19,7 +18,7 @@ The integration between Maven and Docker is done using the `docker-maven-plugin`
 KIE Docker images considerations
 --------------------------------
 
-The `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` and `UF Dashbuilder` modules are used to build the Docker image for each application.
+The `KIE Workbench`, `KIE Drools Workbench` and `KIE Execution Server` modules are used to build the Docker image for each application.
 
 **IMPORTANT NOTE**
 This images are quite different from the official community ones, that you can find at:
@@ -46,9 +45,9 @@ Build process
 
 The build process for this project consist of the following steps:
 * Build database EAP/WildFly modules artifacts that will be used for the next Docker images builds (module = `kie-jboss-modules`)
-* For each project's sub-module (`KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server`, `UF Dashbuilder`)
+* For each project's sub-module (`KIE Workbench`, `KIE Drools Workbench` and `KIE Execution Server`)
     * Create the Maven site for each KIE application located at each project's submodules
-    * Create Docker images for `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` and `UF Dashbuilder` using latest SNAPSHOT versions from both `master` and `product` branches
+    * Create Docker images for `KIE Workbench`, `KIE Drools Workbench` and `KIE Execution Server`using latest SNAPSHOT versions from both `master` and `product` branches
     * Push the images into the Docker registry (this step is currently disabled)
     * Run a Docker container the each recently creaated image
 * Deploy the recently Maven artifacts used for the build into a local filesystem directory (for further consuming)
@@ -72,7 +71,6 @@ Some **Maven profiles** are available for customizing the build process:
 * `kie-wb` - Activated using system property `kie-wb`. This profile includes only the build for `kie-jboss-modules` and `kie-wb`.
 * `kie-drools-wb` - Activated using system property `kie-drools-wb`. This profile includes only the build for `kie-jboss-modules` and `kie-drools-wb`.
 * `kie-server` - Activated using system property `kie-server`. This profile includes only the build for `kie-jboss-modules` and `kie-server`.
-* `uf-dashbuilder` - Activated using system property `uf-dashbuilder`. This profile includes only the build for `kie-jboss-modules` and `uf-dashbuilder`.
 * `kie-artifacts` - Activated using system property `kie-artifacts`. This profile includes only the build for `kie-artifacts`.
 
 You can run the complete build using:
@@ -90,11 +88,7 @@ You can run the build only for KIE Drools Workbench using:
 You can run the build only for KIE Execution Server using:
 
     mvn clean install -P !all,kie-server
-
-You can run the build only for UF Dashbuilder using:
-
-    mvn clean install -P !all,uf-dashbuilder
-
+    
 You can run the build only for deploying KIE Maven artifacts using:
 
     mvn clean install -P !all,kie-artifacts
