@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM ce-registry.usersys.redhat.com/jboss-eap-7-tech-preview/eap70:1.3
+FROM docker-registry.engineering.redhat.com/jboss-eap-7/eap70:latest
 
 ####### MAINTAINER ############
 MAINTAINER "Michael Biarnes Kiefer" "mbiarnes@redhat.com"
