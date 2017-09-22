@@ -25,20 +25,20 @@ DASHBUILDER_VERSION=`mvn -B -e org.apache.maven.plugins:maven-help-plugin:2.1.1:
 DASHBUILDER_BASE_VERSION=`echo ${DASHBUILDER_VERSION} | cut -c -5`
 
 echo "Stopping containers with ${TIMESTAMP} in name"
-docker ps | grep "${TIMESTAMP}" | awk '{print $1}' | xargs -r docker stop
+docker ps | grep "${TIMESTAMP//./\\.}" | awk '{print $1}' | xargs -r docker stop
 echo "Stopping containers with ${BASE_VERSION} in name"
-docker ps | grep "${BASE_VERSION}" | awk '{print $1}' | xargs -r docker stop
+docker ps | grep "${BASE_VERSION//./\\.}" | awk '{print $1}' | xargs -r docker stop
 echo "Stopping containers with ${DASHBUILDER_BASE_VERSION} in name"
-docker ps | grep "${DASHBUILDER_BASE_VERSION}" | awk '{print $1}' | xargs -r docker stop
+docker ps | grep "${DASHBUILDER_BASE_VERSION//./\\.}" | awk '{print $1}' | xargs -r docker stop
 
 echo "Removing containers with ${TIMESTAMP} in name"
-docker ps -a | grep "${TIMESTAMP}" | awk '{print $1}' | xargs -r docker rm -f
+docker ps -a | grep "${TIMESTAMP//./\\.}" | awk '{print $1}' | xargs -r docker rm -f
 echo "Removing containers with ${BASE_VERSION} in name"
-docker ps -a | grep "${BASE_VERSION}" | awk '{print $1}' | xargs -r docker rm -f
+docker ps -a | grep "${BASE_VERSION//./\\.}" | awk '{print $1}' | xargs -r docker rm -f
 echo "Removing containers with ${DASHBUILDER_BASE_VERSION} in name"
-docker ps -a | grep "${DASHBUILDER_BASE_VERSION}" | awk '{print $1}' | xargs -r docker rm -f
+docker ps -a | grep "${DASHBUILDER_BASE_VERSION//./\\.}" | awk '{print $1}' | xargs -r docker rm -f
 
 # don't remove images for the base version, they should be removed periodically with other script
 # we want to keep them around for some days in case needed
 echo "Removing images with ${TIMESTAMP} in name"
-docker images --no-trunc | grep "${TIMESTAMP}" | awk '{print $3}' | xargs -r docker rmi -f
+docker images --no-trunc | grep "${TIMESTAMP//./\\.}" | awk '{print $3}' | xargs -r docker rmi -f
