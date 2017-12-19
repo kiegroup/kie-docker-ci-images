@@ -38,6 +38,15 @@
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
     </dependencySet>
 
+    <!-- The KIE Server war to include into docker container. -->
+    <dependencySet>
+      <includes>
+        <include>org.kie.server:kie-server:war:webc</include>
+      </includes>
+      <outputDirectory>.</outputDirectory>
+      <outputFileNameMapping>kie-server.war</outputFileNameMapping>
+    </dependencySet>
+
   </dependencySets>
 
 </assembly>

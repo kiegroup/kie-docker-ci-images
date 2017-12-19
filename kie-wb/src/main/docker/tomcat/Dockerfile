@@ -9,7 +9,11 @@ ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
-ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
+ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom \
+ -Dorg.kie.server.id=test-kie-server -Dorg.kie.server.controller=http://localhost:8080/kie-wb/rest/controller -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
+ -Djbpm.tsr.jndi.lookup=java:comp/env/TransactionSynchronizationRegistry -Dorg.kie.server.persistence.ds=java:comp/env/jdbc/jbpm -Djbpm.tm.jndi.lookup=java:comp/env/TransactionManager \
+ -Dorg.kie.server.persistence.tm=JBossTS -Dhibernate.connection.release_mode=after_transaction \
+ -Dorg.jbpm.ht.admin.user=wbadmin -Dorg.jbpm.ht.admin.group=admin
 ENV KIE_CONNECTION_URL jdbc:h2:file:~/jbpm
 ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
@@ -23,6 +27,12 @@ ADD maven/kie-wb.war $CATALINA_HOME/webapps/kie-wb.war
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-wb $CATALINA_HOME/webapps/kie-wb.war && \
 rm -rf $CATALINA_HOME/webapps/kie-wb.war
+
+# Add the kie-server WAR artifact from the assembly result.
+ADD maven/kie-server.war $CATALINA_HOME/webapps/kie-server-archive.war
+
+RUN unzip -q -d $CATALINA_HOME/webapps/kie-server $CATALINA_HOME/webapps/kie-server-archive.war && \
+rm -rf $CATALINA_HOME/webapps/kie-server-archive.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

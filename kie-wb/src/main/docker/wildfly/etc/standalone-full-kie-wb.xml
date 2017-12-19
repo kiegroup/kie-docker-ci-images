@@ -48,6 +48,11 @@
              See https://issues.jboss.org/browse/JBEAP-2947 for more info. -->
         <property name="activemq.artemis.client.global.thread.pool.max.size" value="30"/>
         <property name="activemq.artemis.client.global.scheduled.thread.pool.core.size" value="30"/>
+        <property name="org.kie.server.id" value="test-kie-server"/>
+        <property name="org.kie.server.controller" value="http://localhost:8080/kie-wb/rest/controller"/>
+        <property name="org.kie.server.location" value="http://localhost:8080/kie-server/services/rest/server"/>
+        <property name="org.jbpm.ht.admin.user" value="wbadmin"/>
+        <property name="org.jbpm.ht.admin.group" value="admin"/>
     </system-properties>
 
     <management>
@@ -379,6 +384,7 @@
                             <module-option name="usersProperties" value="${jboss.server.config.dir}/kie-wb-users.properties"/>
                             <module-option name="rolesProperties" value="${jboss.server.config.dir}/kie-wb-roles.properties"/>
                         </login-module>
+                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.kie-server.war"/>
                     </authentication>
                 </security-domain>
                 <security-domain name="jboss-web-policy" cache-type="default">
