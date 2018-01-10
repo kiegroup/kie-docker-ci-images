@@ -32,6 +32,21 @@
       <type>war</type>
       <classifier>eap7</classifier>
     </dependency>
+
+    <!-- Kie Server -->
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <type>war</type>
+      <classifier>ee7</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.server</groupId>
+      <artifactId>kie-server</artifactId>
+      <type>war</type>
+      <classifier>webc</classifier>
+    </dependency>
+
     <!-- Additional dependencies for Tomcat 8 -->
     <dependency>
       <groupId>org.kie</groupId>
@@ -115,7 +130,7 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-wildfly10:${docker.build.kie.tag}</name>
+              <name>${docker.kie.repository}/kie-drools-wb-kie-server-wildfly10:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-wildfly10-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
@@ -150,7 +165,7 @@
               </run>
             </image>
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-eap7:${docker.build.kie.tag}</name>
+              <name>${docker.kie.repository}/kie-drools-wb-kie-server-eap7:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-eap7-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
@@ -185,7 +200,7 @@
               </run>
             </image>
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-tomcat8:${docker.build.kie.tag}</name>
+              <name>${docker.kie.repository}/kie-drools-wb-kie-server-tomcat8:${docker.build.kie.tag}</name>
               <alias>kie-drools-wb-tomcat8-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>

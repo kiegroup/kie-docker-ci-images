@@ -41,11 +41,13 @@
   <role rolename="developer"/>
   <role rolename="user"/>
   <role rolename="manager"/>
-  <user username="apurva" password="apurva" roles="analyst,admin,developer,user,manager,manager-gui"/>
-  <user username="analyst" password="analyst" roles="analyst"/>
-  <user username="admin" password="admin" roles="admin"/>
-  <user username="developer" password="developer" roles="developer"/>
-  <user username="user" password="user" roles="user"/>
-  <user username="manager" password="manager" roles="manager,manager-gui"/>
-  
+  <role rolename="kie-server"/>
+  <user username="apurva" password="apurva" roles="analyst,admin,developer,user,manager,manager-gui,kie-server"/>
+  <user username="analyst" password="analyst" roles="analyst,kie-server"/>
+  <user username="wbadmin" password="wbadmin" roles="admin,kie-server"/>
+  <user username="developer" password="developer" roles="developer,kie-server"/>
+  <user username="user" password="user" roles="user,kie-server"/>
+  <user username="manager" password="manager" roles="manager,manager-gui,kie-server"/>
+  <user username="kieserver" password="kieserver1!" roles="kie-server"/>
+
 </tomcat-users>

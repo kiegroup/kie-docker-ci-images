@@ -9,7 +9,9 @@ ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
-ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
+ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom \
+ -Dorg.kie.server.id=test-kie-server -Dorg.kie.server.controller=http://localhost:8080/kie-drools-wb/rest/controller -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
+ -Dorg.jbpm.server.ext.disabled=true -Dorg.jbpm.ui.server.ext.disabled=true -Dorg.jbpm.search.server.ext.disabled=true -Dorg.jbpm.case.server.ext.disabled=true
 ENV KIE_CONNECTION_URL jdbc:h2:file:~/jbpm
 ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
@@ -23,6 +25,12 @@ ADD maven/kie-drools-wb.war $CATALINA_HOME/webapps/kie-drools-wb.war
 
 RUN unzip -q -d $CATALINA_HOME/webapps/kie-drools-wb $CATALINA_HOME/webapps/kie-drools-wb.war && \
 rm -rf $CATALINA_HOME/webapps/kie-drools-wb.war
+
+# Add the kie-server WAR artifact from the assembly result.
+ADD maven/kie-server.war $CATALINA_HOME/webapps/kie-server-archive.war
+
+RUN unzip -q -d $CATALINA_HOME/webapps/kie-server $CATALINA_HOME/webapps/kie-server-archive.war && \
+rm -rf $CATALINA_HOME/webapps/kie-server-archive.war
 
 ####### TOMCAT EXTRA LIBRARIES ############
 ADD maven/tomcat-libs $CATALINA_HOME/lib/

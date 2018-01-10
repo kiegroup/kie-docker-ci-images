@@ -10,6 +10,14 @@
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
     </dependencySet>
+    <!-- The KIE Server war to include into docker container. -->
+    <dependencySet>
+      <includes>
+        <include>org.kie.server:kie-server:war:ee7</include>
+      </includes>
+      <outputDirectory>.</outputDirectory>
+      <outputFileNameMapping>kie-server.war</outputFileNameMapping>
+    </dependencySet>
     <!-- The MySQL database module to include into docker container. -->
     <dependencySet>
       <includes>

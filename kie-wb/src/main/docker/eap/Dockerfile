@@ -42,6 +42,9 @@ ADD etc/update-jpa-config.sh $JBOSS_HOME/bin/update-jpa-config.sh
 # Add the kie-wb WAR artifact from the assembly result.
 ADD maven/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war
 
+# Add the kie-server WAR artifact from the assembly result.
+ADD maven/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.war
+
 # Database MySQL and PostgreSQL modules
 ADD maven/modules/kie-eap-mysql-module.tar.gz $JBOSS_HOME/modules/system/layers/base
 ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/layers/base
@@ -50,6 +53,9 @@ ADD maven/modules/kie-eap-postgres-module.tar.gz $JBOSS_HOME/modules/system/laye
 RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-wb.war $JBOSS_HOME/standalone/deployments/kie-wb-archive.war && \
 touch $JBOSS_HOME/standalone/deployments/kie-wb.war.dodeploy && \
 rm -rf $JBOSS_HOME/standalone/deployments/kie-wb-archive.war
+RUN unzip -q -d $JBOSS_HOME/standalone/deployments/kie-server.war $JBOSS_HOME/standalone/deployments/kie-server-archive.war && \
+touch $JBOSS_HOME/standalone/deployments/kie-server.war.dodeploy && \
+rm -rf $JBOSS_HOME/standalone/deployments/kie-server-archive.war
 
 # Set right permissions for jboss user.
 RUN chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \

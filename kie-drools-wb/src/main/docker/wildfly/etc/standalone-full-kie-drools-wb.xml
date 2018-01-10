@@ -43,6 +43,13 @@
         <property name="designerdataobjects" value="${designerdataobjects:false}"/>
         <!-- Make GIT repositories available from outside localhost. -->
         <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
+        <property name="org.kie.server.id" value="test-kie-server"/>
+        <property name="org.kie.server.controller" value="http://localhost:8080/kie-drools-wb/rest/controller"/>
+        <property name="org.kie.server.location" value="http://localhost:8080/kie-server/services/rest/server"/>
+        <property name="org.jbpm.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.ui.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.search.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.case.server.ext.disabled" value="true"/>
     </system-properties>
 
     <management>
@@ -374,6 +381,7 @@
                             <module-option name="usersProperties" value="${jboss.server.config.dir}/kie-drools-wb-users.properties"/>
                             <module-option name="rolesProperties" value="${jboss.server.config.dir}/kie-drools-wb-roles.properties"/>
                         </login-module>
+                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.kie-server.war"/>
                     </authentication>
                 </security-domain>
                 <security-domain name="jboss-web-policy" cache-type="default">
