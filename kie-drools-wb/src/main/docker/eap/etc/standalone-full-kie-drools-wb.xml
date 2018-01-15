@@ -391,7 +391,7 @@
                             <module-option name="usersProperties" value="${jboss.server.config.dir}/kie-drools-wb-users.properties"/>
                             <module-option name="rolesProperties" value="${jboss.server.config.dir}/kie-drools-wb-roles.properties"/>
                         </login-module>
-                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.kie-server.war"/>
+                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.kie-drools-wb.war"/>
                     </authentication>
                 </security-domain>
             </security-domains>
