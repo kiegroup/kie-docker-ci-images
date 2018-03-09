@@ -15,7 +15,7 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb:war:wildfly10
+LABEL org.kie.kie-drools-wb.artifact=org.kie:kie-drools-wb:war:wildfly11
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -23,7 +23,7 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### KIE-DROOLS-WB & WILDFLY10 CONFIG FILES ############
+####### KIE-DROOLS-WB & WILDFLY11 CONFIG FILES ############
 # Latest WAR from Maven repository & Custom WildFly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
