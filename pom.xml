@@ -90,7 +90,20 @@
         <classifier>eap-postgres</classifier>
         <type>tar.gz</type>
       </dependency>
-
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-wb</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+        <classifier>wildfly11</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-drools-wb</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+        <classifier>wildfly11</classifier>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
