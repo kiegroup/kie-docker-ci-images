@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.docker</groupId>
     <artifactId>kie-docker-ci-images</artifactId>
-    <version>7.6.0-SNAPSHOT</version>
+    <version>7.7.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>kie-server</artifactId>
@@ -83,12 +83,12 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-server-wildfly10:${docker.build.kie.tag}</name>
-              <alias>kie-server-wildfly10-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-server-wildfly11:${docker.build.kie.tag}</name>
+              <alias>kie-server-wildfly11-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly10.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly11.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -111,7 +111,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>kie-server-wildfly10</prefix>
+                  <prefix>kie-server-wildfly11</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>

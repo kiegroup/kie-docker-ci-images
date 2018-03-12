@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.docker</groupId>
     <artifactId>kie-docker-ci-images</artifactId>
-    <version>7.6.0-SNAPSHOT</version>
+    <version>7.7.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>kie-drools-wb</artifactId>
@@ -18,7 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb</artifactId>
       <type>war</type>
-      <classifier>wildfly10</classifier>
+      <classifier>wildfly11</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -130,12 +130,12 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-kie-server-wildfly10:${docker.build.kie.tag}</name>
-              <alias>kie-drools-wb-wildfly10-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-drools-wb-kie-server-wildfly11:${docker.build.kie.tag}</name>
+              <alias>kie-drools-wb-wildfly11-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly10.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly11.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -158,7 +158,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>kie-drools-wb-wildfly10</prefix>
+                  <prefix>kie-drools-wb-wildfly11</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>

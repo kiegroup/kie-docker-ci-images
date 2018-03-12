@@ -23,7 +23,7 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### KIE-WB & WILDFLY 10 CONFIG FILES ############
+####### KIE-WB & WILDFLY 11 CONFIG FILES ############
 # Latest WAR from Red Hat repository & Custom EAP7 configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
