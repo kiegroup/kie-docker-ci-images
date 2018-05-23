@@ -57,12 +57,6 @@
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server</artifactId>
       <type>war</type>
-      <classifier>ee6</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.server</groupId>
-      <artifactId>kie-server</artifactId>
-      <type>war</type>
       <classifier>ee7</classifier>
     </dependency>
     <dependency>
