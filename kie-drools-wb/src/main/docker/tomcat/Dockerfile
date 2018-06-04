@@ -8,8 +8,8 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
-ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
+ENV JAVA_OPTS  -Xms256m -Xmx2048m
+NV CATALINA_OPTS -Xmx2048m -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
 ENV KIE_CONNECTION_URL jdbc:h2:file:~/jbpm
 ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
