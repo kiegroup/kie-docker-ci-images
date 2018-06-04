@@ -8,8 +8,8 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
-ENV CATALINA_OPTS -Xmx512M -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom \
+ENV JAVA_OPTS  -Xms256m -Xmx2048m
+ENV CATALINA_OPTS -Xmx2048m -XX:MaxPermSize=512m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom \
  -Dorg.kie.server.id=test-kie-server -Dorg.kie.server.controller=http://localhost:8080/kie-drools-wb/rest/controller -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
  -Dorg.jbpm.server.ext.disabled=true -Dorg.jbpm.ui.server.ext.disabled=true -Dorg.jbpm.search.server.ext.disabled=true -Dorg.jbpm.case.server.ext.disabled=true
 ENV KIE_CONNECTION_URL jdbc:h2:file:~/jbpm
