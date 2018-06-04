@@ -149,11 +149,11 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kiewb.wf10.http.port:8080</port>
+                  <port>kiewb.wf11.http.port:8080</port>
                 </ports>
                 <wait>
                   <http>
-                    <url>http://localhost:${kiewb.wf10.http.port}/kie-wb</url>
+                    <url>http://localhost:${kiewb.wf11.http.port}/kie-wb</url>
                     <method>GET</method>
                   </http>
                   <time>${docker.run.timeout}</time>
