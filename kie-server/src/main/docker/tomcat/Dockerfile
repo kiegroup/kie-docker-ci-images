@@ -8,8 +8,8 @@ MAINTAINER "Roger Martinez" "romartin@redhat.com"
 ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -Xms256m -Xmx512m
-ENV CATALINA_OPTS -Xmx512M -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
+ENV JAVA_OPTS -Xms256m -Xmx1024m
+ENV CATALINA_OPTS -Xmx1024m -Dbtm.root=$CATALINA_HOME -Dbitronix.tm.configuration=$CATALINA_HOME/conf/btm-config.properties -Djava.security.egd=file:/dev/./urandom
 LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:webc
 
 ####### KIE-SERVER WAR ############
