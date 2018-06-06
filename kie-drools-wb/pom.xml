@@ -148,11 +148,11 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kiedroolswb.wf10.http.port:8080</port>
+                  <port>kiedroolswb.wf11.http.port:8080</port>
                 </ports>
                 <wait>
                   <http>
-                    <url>http://localhost:${kiedroolswb.wf10.http.port}/kie-drools-wb</url>
+                    <url>http://localhost:${kiedroolswb.wf11.http.port}/kie-drools-wb</url>
                     <method>GET</method>
                   </http>
                   <time>${docker.run.timeout}</time>

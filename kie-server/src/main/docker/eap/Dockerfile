@@ -8,7 +8,7 @@ MAINTAINER "Michael Biarnés Kiefer" "mbiarnes@redhat.com"
 ENV LANG en_US.UTF-8
 
 ####### ENVIRONMENT ############
-ENV JAVA_OPTS -Xms256m -Xmx512m
+ENV JAVA_OPTS -Xms256m -Xmx1024m
 ENV JBOSS_BIND_ADDRESS 0.0.0.0
 LABEL org.kie.kie-server.artifact=org.kie.server:kie-server:war:ee7
 
