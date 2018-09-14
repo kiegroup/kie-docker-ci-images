@@ -24,12 +24,6 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb</artifactId>
       <type>war</type>
-      <classifier>tomcat8</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-wb</artifactId>
-      <type>war</type>
       <classifier>eap7</classifier>
     </dependency>
 
@@ -38,12 +32,6 @@
       <artifactId>kie-drools-wb</artifactId>
       <type>war</type>
       <classifier>wildfly11</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drools-wb</artifactId>
-      <type>war</type>
-      <classifier>tomcat8</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
