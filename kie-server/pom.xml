@@ -26,40 +26,6 @@
       <classifier>webc</classifier>
       <type>war</type>
     </dependency>
-
-    <!-- Additional dependencies for Tomcat 8 -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-tomcat-integration</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.btm</groupId>
-      <artifactId>btm</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.btm</groupId>
-      <artifactId>btm-tomcat55-lifecycle</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.spec.javax.transaction</groupId>
-      <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jdk14</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.spec.javax.security.jacc</groupId>
-      <artifactId>jboss-jacc-api_1.5_spec</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
@@ -70,7 +36,6 @@
       </resource>
     </resources>
     <plugins>
-
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
@@ -141,42 +106,6 @@
                 </wait>
                 <log>
                   <prefix>kie-server-eap7</prefix>
-                  <date>ISO8601</date>
-                  <color>blue</color>
-                </log>
-              </run>
-            </image>
-            <image>
-              <name>${docker.kie.repository}/kie-server-tomcat8:${docker.build.kie.tag}</name>
-              <alias>kie-server-tomcat8-${docker.build.kie.tag}-h2</alias>
-              <build>
-                <dockerFileDir>${project.build.outputDirectory}/tomcat</dockerFileDir>
-                <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-tomcat8.xml</descriptor>
-                </assembly>
-              </build>
-              <run>
-                <namingStrategy>alias</namingStrategy>
-                <env>
-                  <KIE_CONNECTION_URL>jdbc:h2:file:~/jbpm</KIE_CONNECTION_URL>
-                  <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
-                  <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
-                  <!-- Empty password by default. -->
-                  <!--<KIE_CONNECTION_PASSWORD></KIE_CONNECTION_PASSWORD>-->
-                  <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
-                </env>
-                <ports>
-                  <port>kieserver.t8.http.port:8080</port>
-                </ports>
-                <wait>
-                  <http>
-                    <url>http://localhost:${kieserver.t8.http.port}/kie-server</url>
-                    <method>GET</method>
-                  </http>
-                  <time>${docker.run.timeout}</time>
-                </wait>
-                <log>
-                  <prefix>kie-server-tomcat8</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
