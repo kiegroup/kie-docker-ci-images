@@ -18,7 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb</artifactId>
       <type>war</type>
-      <classifier>wildfly11</classifier>
+      <classifier>wildfly14</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -31,7 +31,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb</artifactId>
       <type>war</type>
-      <classifier>wildfly11</classifier>
+      <classifier>wildfly14</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>

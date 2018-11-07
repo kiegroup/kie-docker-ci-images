@@ -95,14 +95,14 @@
         <artifactId>kie-wb</artifactId>
         <version>${project.version}</version>
         <type>war</type>
-        <classifier>wildfly11</classifier>
+        <classifier>wildfly14</classifier>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>kie-drools-wb</artifactId>
         <version>${project.version}</version>
         <type>war</type>
-        <classifier>wildfly11</classifier>
+        <classifier>wildfly14</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>

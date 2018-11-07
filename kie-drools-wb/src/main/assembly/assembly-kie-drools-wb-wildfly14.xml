@@ -5,7 +5,7 @@
     <!-- The war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-drools-wb:war:wildfly11</include>
+        <include>org.kie:kie-drools-wb:war:wildfly14</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
