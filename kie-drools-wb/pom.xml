@@ -18,7 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-drools-wb</artifactId>
       <type>war</type>
-      <classifier>wildfly11</classifier>
+      <classifier>wildfly14</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -112,12 +112,12 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-drools-wb-kie-server-wildfly11:${docker.build.kie.tag}</name>
-              <alias>kie-drools-wb-wildfly11-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-drools-wb-kie-server-wildfly14:${docker.build.kie.tag}</name>
+              <alias>kie-drools-wb-wildfly14-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly11.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-drools-wb-wildfly14.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -130,17 +130,17 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kiedroolswb.wf11.http.port:8080</port>
+                  <port>kiedroolswb.wf14.http.port:8080</port>
                 </ports>
                 <wait>
                   <http>
-                    <url>http://localhost:${kiedroolswb.wf11.http.port}/kie-drools-wb</url>
+                    <url>http://localhost:${kiedroolswb.wf14.http.port}/kie-drools-wb</url>
                     <method>GET</method>
                   </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>kie-drools-wb-wildfly11</prefix>
+                  <prefix>kie-drools-wb-wildfly14</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
