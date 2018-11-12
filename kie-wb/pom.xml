@@ -18,7 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-wb</artifactId>
       <type>war</type>
-      <classifier>wildfly11</classifier>
+      <classifier>wildfly14</classifier>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -112,12 +112,12 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-wb-kie-server-wildfly11:${docker.build.kie.tag}</name>
-              <alias>kie-wb-wildfly11-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-wb-kie-server-wildfly14:${docker.build.kie.tag}</name>
+              <alias>kie-wb-wildfly14-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-wildfly11.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-wb-wildfly14.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -140,7 +140,7 @@
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>kie-wb-wildfly11</prefix>
+                  <prefix>kie-wb-wildfly14</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
