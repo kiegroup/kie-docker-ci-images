@@ -40,6 +40,7 @@
         <property name="org.kie.server.location" value="http://localhost:8080/kie-server/services/rest/server"/>
         <property name="org.jbpm.ht.admin.user" value="wbadmin"/>
         <property name="org.jbpm.ht.admin.group" value="admin"/>
+        <property name="appformer.experimental.features" value="true"/>
     </system-properties>
 
     <management>
