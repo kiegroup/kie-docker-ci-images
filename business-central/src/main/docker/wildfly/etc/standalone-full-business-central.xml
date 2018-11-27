@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-  Custom modifications for KIE Workbench marked with "#### KIE Workbench - <description> ####"
+  Custom modifications for KIE Drools Workbench marked with "#### KIE Drools Workbench - <description> ####"
   ***************************************
 -->
 <server xmlns="urn:jboss:domain:5.0">
@@ -38,24 +38,20 @@
         <extension module="org.wildfly.iiop-openjdk"/>
     </extensions>
 
-    <!-- #### KIE Workbench - custom system properties #### -->
+    <!-- #### KIE Drools Workbench - custom system properties #### -->
     <system-properties>
         <property name="org.kie.example" value="${org.kie.example:true}"/>
         <property name="org.jbpm.designer.perspective" value="${org.jbpm.designer.perspective:full}"/>
         <property name="designerdataobjects" value="${designerdataobjects:false}"/>
         <!-- Make GIT repositories available from outside localhost. -->
         <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
-        <!-- Artemis Client by default creates a fixed thread pool with 500 threads. On some systems the number
-             of available threads is limited, so WildFly will fail with java.lang.OutOfMemoryError: unable to create new native thread.
-             See https://issues.jboss.org/browse/JBEAP-2947 for more info. -->
-        <property name="activemq.artemis.client.global.thread.pool.max.size" value="30"/>
-        <property name="activemq.artemis.client.global.scheduled.thread.pool.core.size" value="30"/>
         <property name="org.kie.server.id" value="test-kie-server"/>
-        <property name="org.kie.server.controller" value="http://localhost:8080/kie-wb/rest/controller"/>
+        <property name="org.kie.server.controller" value="http://localhost:8080/business-central/rest/controller"/>
         <property name="org.kie.server.location" value="http://localhost:8080/kie-server/services/rest/server"/>
-        <property name="org.jbpm.ht.admin.user" value="wbadmin"/>
-        <property name="org.jbpm.ht.admin.group" value="admin"/>
-        <property name="appformer.experimental.features" value="true"/>
+        <property name="org.jbpm.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.ui.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.search.server.ext.disabled" value="true"/>
+        <property name="org.jbpm.case.server.ext.disabled" value="true"/>
     </system-properties>
 
     <management>
@@ -69,7 +65,7 @@
                     <properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
                 </authorization>
             </security-realm>
-            <!-- #### KIE Workbench - custom property files for authentication/authorization #### -->
+            <!-- #### KIE Drools Workbench - custom property files for authentication/authorization #### -->
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
@@ -78,10 +74,10 @@
                 </server-identities>
                 <authentication>
                     <local default-user="$local" allowed-users="*" skip-group-loading="true"/>
-                    <properties path="kie-wb-users.properties" relative-to="jboss.server.config.dir"/>
+                    <properties path="business-central-users.properties" relative-to="jboss.server.config.dir"/>
                 </authentication>
                 <authorization>
-                    <properties path="kie-wb-roles.properties" relative-to="jboss.server.config.dir"/>
+                    <properties path="business-central-roles.properties" relative-to="jboss.server.config.dir"/>
                 </authorization>
             </security-realm>
         </security-realms>
@@ -168,7 +164,7 @@
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:5.0">
             <datasources>
-                <!-- #### KIE Workbench - Custom datasource properties #### -->
+                <!-- #### KIE Drools Workbench - Custom datasource properties #### -->
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
                     <connection-url>${jboss.kie.connection_url:jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}</connection-url>
                     <driver>${jboss.kie.driver:h2}</driver>
@@ -178,7 +174,7 @@
                     </security>
                 </datasource>
                 <drivers>
-                    <!-- #### KIE Workbench - Custom extra drivers #### -->
+                    <!-- #### KIE Drools Workbench - Custom extra drivers #### -->
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
@@ -490,12 +486,12 @@
             <security-domains>
                 <security-domain name="other" cache-type="default">
                     <authentication>
-                        <!-- #### KIE Workbench - custom login module #### -->
+                        <!-- #### KIE Drools Workbench - custom login module #### -->
                         <login-module code="UsersRoles" flag="required">
-                            <module-option name="usersProperties" value="${jboss.server.config.dir}/kie-wb-users.properties"/>
-                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/kie-wb-roles.properties"/>
+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/business-central-users.properties"/>
+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/business-central-roles.properties"/>
                         </login-module>
-                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.kie-wb.war"/>
+                        <login-module code="org.kie.security.jaas.KieLoginModule" flag="required" module="deployment.business-central.war"/>
                     </authentication>
                 </security-domain>
                 <security-domain name="jboss-web-policy" cache-type="default">

@@ -25,14 +25,14 @@ fi
 # Check MySQL database.
 if [[ $KIE_CONNECTION_DRIVER == *mysql* ]]; 
 then
-    echo "Using MySQL dialect for kie-drools-wb webapp. "
+    echo "Using MySQL dialect for business-central webapp. "
     DIALECT=org.hibernate.dialect.MySQLDialect
 fi
 
 # Check MySQL database.
 if [[ $KIE_CONNECTION_DRIVER == *postgre* ]]; 
 then
-    echo "Using PostgreSQL dialect for kie-drools-wb webapp. "
+    echo "Using PostgreSQL dialect for business-central webapp. "
     DIALECT=org.hibernate.dialect.PostgreSQLDialect
 fi
 
