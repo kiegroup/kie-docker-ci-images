@@ -92,17 +92,17 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-wb</artifactId>
+        <artifactId>business-central</artifactId>
         <version>${project.version}</version>
         <type>war</type>
         <classifier>wildfly14</classifier>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>kie-drools-wb</artifactId>
+        <artifactId>business-central</artifactId>
         <version>${project.version}</version>
         <type>war</type>
-        <classifier>wildfly14</classifier>
+        <classifier>eap7</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -174,40 +174,24 @@
       </activation>
       <modules>
         <module>kie-jboss-modules</module>
-        <module>kie-wb</module>
-        <module>kie-drools-wb</module>
+        <module>business-central</module>
         <module>kie-server</module>
         <module>kie-artifacts</module>
       </modules>
     </profile>
 
-    <!-- KIE Workbench. -->
+    <!-- KIE Workbench (business-central) -->
     <profile>
-      <id>kie-wb</id>
+      <id>business-central</id>
       <activation>
         <activeByDefault>false</activeByDefault>
         <property>
-          <name>kie-wb</name>
+          <name>business-central</name>
         </property>
       </activation>
       <modules>
         <module>kie-jboss-modules</module>
-        <module>kie-wb</module>
-      </modules>
-    </profile>
-
-    <!-- KIE Drools Workbench. -->
-    <profile>
-      <id>kie-drools-wb</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>kie-drools-wb</name>
-        </property>
-      </activation>
-      <modules>
-        <module>kie-jboss-modules</module>
-        <module>kie-drools-wb</module>
+        <module>business-central</module>
       </modules>
     </profile>
 

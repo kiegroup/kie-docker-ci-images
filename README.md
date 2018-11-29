@@ -7,9 +7,8 @@ Introduction
 This project is used to achieve a lightweight continuous integration system for our daily development. It Dockerizes some KIE applications and runs them in a Docker containers.
 
 Project's modules are:               
-* `kie-jboss-modules` - Generates and assemblies the MySQL and PostgreSQL database modules for WildFly               
-* `kie-wb` - Builds and runs the `KIE Workbench` Docker image with latest build from master branch.
-* `kie-drools-wb` - Builds and runs the `KIE Drools Workbench` Docker image with latest build from master branch.
+* `kie-jboss-modules` - Generates and assemblies the MySQL and PostgreSQL database modules for WildFly
+* `business-central` - Builds and runs the `Business Central` Docker image with latest build from master branch.
 * `kie-server` - Builds and runs the `KIE Execution Server` Docker image with latest build from master branch.
 * `kie-artifacts` - Deploy all the Maven artifacts used for all the previous applications into an specified local filesystem path, were they can be later consumed
 
@@ -67,8 +66,7 @@ Usage
 Some **Maven profiles** are available for customizing the build process:                       
 * `all` - Activated by default and using system property `all`. This profile includes all the project's submodules.                        
 * `kie-wb` - Activated using system property `kie-wb`. This profile includes only the build for `kie-jboss-modules` and `kie-wb`.                     
-* `kie-drools-wb` - Activated using system property `kie-drools-wb`. This profile includes only the build for `kie-jboss-modules` and `kie-drools-wb`.                     
-* `kie-server` - Activated using system property `kie-server`. This profile includes only the build for `kie-jboss-modules` and `kie-server`.                     
+* `kie-server` - Activated using system property `kie-server`. This profile includes only the build for `kie-jboss-modules` and `kie-server`.
 * `kie-artifacts` - Activated using system property `kie-artifacts`. This profile includes only the build for `kie-artifacts`.
 
 You can run the complete build using:                    
@@ -79,9 +77,9 @@ You can run the build only for KIE Workbench using:
 
     mvn clean install -P !all,kie-wb
 
-You can run the build only for KIE Drools Workbench using:                    
+You can run the build only for Business Central using:
 
-    mvn clean install -P !all,kie-drools-wb
+    mvn clean install -P !all,business-central
 
 You can run the build only for KIE Execution Server using:                    
 

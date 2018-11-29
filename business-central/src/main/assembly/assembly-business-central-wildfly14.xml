@@ -5,10 +5,10 @@
     <!-- The war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie:kie-drools-wb:war:wildfly14</include>
+        <include>org.kie:business-central:war:wildfly14</include>
       </includes>
       <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>kie-drools-wb.war</outputFileNameMapping>
+      <outputFileNameMapping>business-central.war</outputFileNameMapping>
     </dependencySet>
     <!-- The KIE Server war to include into docker container. -->
     <dependencySet>
