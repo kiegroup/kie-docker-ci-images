@@ -112,7 +112,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>${docker.kie.repository}/business-central-server-wildfly14:${docker.build.kie.tag}</name>
+                            <name>${docker.kie.repository}/business-central-wildfly14:${docker.build.kie.tag}</name>
                             <alias>business-central-wildfly14-${docker.build.kie.tag}-h2</alias>
                             <build>
                                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
@@ -147,7 +147,7 @@
                             </run>
                         </image>
                         <image>
-                            <name>${docker.kie.repository}/business-central-kie-server-eap7:${docker.build.kie.tag}</name>
+                            <name>${docker.kie.repository}/business-central-eap7:${docker.build.kie.tag}</name>
                             <alias>business-central-eap7-${docker.build.kie.tag}-h2</alias>
                             <build>
                                 <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
