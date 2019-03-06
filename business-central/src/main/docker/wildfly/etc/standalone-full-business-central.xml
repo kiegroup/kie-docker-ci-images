@@ -48,10 +48,6 @@
         <property name="org.kie.server.id" value="test-kie-server"/>
         <property name="org.kie.server.controller" value="http://localhost:8080/business-central/rest/controller"/>
         <property name="org.kie.server.location" value="http://localhost:8080/kie-server/services/rest/server"/>
-        <property name="org.jbpm.server.ext.disabled" value="true"/>
-        <property name="org.jbpm.ui.server.ext.disabled" value="true"/>
-        <property name="org.jbpm.search.server.ext.disabled" value="true"/>
-        <property name="org.jbpm.case.server.ext.disabled" value="true"/>
     </system-properties>
 
     <management>
