@@ -45,16 +45,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Defines versions for all all internal and 3rd party artifacts. Using the kie-platform-bom to make sure
-           the versions are always properly aligned to the ones used in the KIE Platform. -->
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-platform-bom</artifactId>
-        <version>${docker.kie.artifacts.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
       <dependency>
         <groupId>postgresql</groupId>
         <artifactId>postgresql</artifactId>
