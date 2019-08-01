@@ -20,12 +20,6 @@
             <type>war</type>
             <classifier>wildfly14</classifier>
         </dependency>
-        <dependency>
-            <groupId>org.kie</groupId>
-            <artifactId>business-central</artifactId>
-            <type>war</type>
-            <classifier>eap7</classifier>
-        </dependency>
 
         <!-- Kie Server -->
         <dependency>
@@ -82,18 +76,6 @@
             <classifier>wildfly-postgres</classifier>
             <type>tar.gz</type>
         </dependency>
-        <dependency>
-            <groupId>org.kie.docker</groupId>
-            <artifactId>kie-jboss-modules</artifactId>
-            <classifier>eap-mysql</classifier>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.kie.docker</groupId>
-            <artifactId>kie-jboss-modules</artifactId>
-            <classifier>eap-postgres</classifier>
-            <type>tar.gz</type>
-        </dependency>
 
     </dependencies>
 
@@ -141,41 +123,6 @@
                                 </wait>
                                 <log>
                                     <prefix>business-central-wildfly14</prefix>
-                                    <date>ISO8601</date>
-                                    <color>blue</color>
-                                </log>
-                            </run>
-                        </image>
-                        <image>
-                            <name>${docker.kie.repository}/business-central-eap7:${docker.build.kie.tag}</name>
-                            <alias>business-central-eap7-${docker.build.kie.tag}-h2</alias>
-                            <build>
-                                <dockerFileDir>${project.build.outputDirectory}/eap</dockerFileDir>
-                                <assembly>
-                                    <descriptor>${pom.basedir}/src/main/assembly/assembly-business-central-eap7.xml</descriptor>
-                                </assembly>
-                            </build>
-                            <run>
-                                <namingStrategy>alias</namingStrategy>
-                                <env>
-                                    <KIE_CONNECTION_URL>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</KIE_CONNECTION_URL>
-                                    <KIE_CONNECTION_DRIVER>h2</KIE_CONNECTION_DRIVER>
-                                    <KIE_CONNECTION_USER>sa</KIE_CONNECTION_USER>
-                                    <KIE_CONNECTION_PASSWORD>sa</KIE_CONNECTION_PASSWORD>
-                                    <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
-                                </env>
-                                <ports>
-                                    <port>kiedroolswb.eap7.http.port:8080</port>
-                                </ports>
-                                <wait>
-                                    <http>
-                                        <url>http://localhost:${kiedroolswb.eap7.http.port}/business-central</url>
-                                        <method>GET</method>
-                                    </http>
-                                    <time>${docker.run.timeout}</time>
-                                </wait>
-                                <log>
-                                    <prefix>business-central-eap7</prefix>
                                     <date>ISO8601</date>
                                     <color>blue</color>
                                 </log>
