@@ -67,32 +67,11 @@
         <type>tar.gz</type>
       </dependency>
       <dependency>
-        <groupId>org.kie.docker</groupId>
-        <artifactId>kie-jboss-modules</artifactId>
-        <classifier>eap-mysql</classifier>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kie.docker</groupId>
-        <artifactId>kie-jboss-modules</artifactId>
-        <version>${project.version}</version>
-        <classifier>eap-postgres</classifier>
-        <type>tar.gz</type>
-      </dependency>
-      <dependency>
         <groupId>org.kie</groupId>
         <artifactId>business-central</artifactId>
         <version>${project.version}</version>
         <type>war</type>
         <classifier>wildfly14</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>business-central</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-        <classifier>eap7</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -41,8 +41,6 @@
           <descriptors>
             <descriptor>src/main/assembly/wildfly/assembly-wildfly-mysql.xml</descriptor>
             <descriptor>src/main/assembly/wildfly/assembly-wildfly-postgres.xml</descriptor>
-            <descriptor>src/main/assembly/eap/assembly-eap-mysql.xml</descriptor>
-            <descriptor>src/main/assembly/eap/assembly-eap-postgres.xml</descriptor>
           </descriptors>
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>

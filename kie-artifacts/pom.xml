@@ -20,12 +20,6 @@
       <type>war</type>
       <classifier>wildfly14</classifier>
     </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>business-central</artifactId>
-      <type>war</type>
-      <classifier>eap7</classifier>
-    </dependency>
 
     <dependency>
       <groupId>org.kie.server</groupId>
