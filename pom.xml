@@ -73,6 +73,20 @@
         <type>war</type>
         <classifier>wildfly14</classifier>
       </dependency>
+      <dependency>
+        <groupId>org.kie.server</groupId>
+        <artifactId>kie-server</artifactId>
+        <type>war</type>
+        <classifier>ee7</classifier>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.server</groupId>
+        <artifactId>kie-server</artifactId>
+        <type>war</type>
+        <classifier>webc</classifier>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
