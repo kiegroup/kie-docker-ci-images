@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie</groupId>
     <artifactId>kie-parent</artifactId>
-    <version>7.26.0-SNAPSHOT</version>
+    <version>7.27.0-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.docker</groupId>
   <artifactId>kie-docker-ci-images</artifactId>
@@ -72,6 +72,20 @@
         <version>${project.version}</version>
         <type>war</type>
         <classifier>wildfly14</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.server</groupId>
+        <artifactId>kie-server</artifactId>
+        <type>war</type>
+        <classifier>ee7</classifier>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.server</groupId>
+        <artifactId>kie-server</artifactId>
+        <type>war</type>
+        <classifier>webc</classifier>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
