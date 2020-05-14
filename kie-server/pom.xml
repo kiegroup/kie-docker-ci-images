@@ -42,12 +42,12 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.kie.repository}/kie-server-wildfly14:${docker.build.kie.tag}</name>
-              <alias>kie-server-wildfly14-${docker.build.kie.tag}-h2</alias>
+              <name>${docker.kie.repository}/kie-server-wildfly18:${docker.build.kie.tag}</name>
+              <alias>kie-server-wildfly18-${docker.build.kie.tag}-h2</alias>
               <build>
                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                 <assembly>
-                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly14.xml</descriptor>
+                  <descriptor>${pom.basedir}/src/main/assembly/assembly-kie-server-wildfly18.xml</descriptor>
                 </assembly>
               </build>
               <run>
@@ -60,17 +60,17 @@
                   <KIE_CONNECTION_DATABASE>kie</KIE_CONNECTION_DATABASE>
                 </env>
                 <ports>
-                  <port>kieserver.wf14.http.port:8080</port>
+                  <port>kieserver.wf18.http.port:8080</port>
                 </ports>
                 <wait>
                   <http>
-                    <url>http://localhost:${kieserver.wf14.http.port}/kie-server</url>
+                    <url>http://localhost:${kieserver.wf18.http.port}/kie-server</url>
                     <method>GET</method>
                   </http>
                   <time>${docker.run.timeout}</time>
                 </wait>
                 <log>
-                  <prefix>kie-server-wildfly14</prefix>
+                  <prefix>kie-server-wildfly18</prefix>
                   <date>ISO8601</date>
                   <color>blue</color>
                 </log>
