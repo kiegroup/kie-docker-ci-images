@@ -71,7 +71,7 @@
         <artifactId>business-central</artifactId>
         <version>${project.version}</version>
         <type>war</type>
-        <classifier>wildfly18</classifier>
+        <classifier>wildfly19</classifier>
       </dependency>
       <dependency>
         <groupId>org.kie.server</groupId>
