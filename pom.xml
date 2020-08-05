@@ -46,7 +46,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>postgresql</groupId>
+        <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.14</version>
         <type>jar</type>
