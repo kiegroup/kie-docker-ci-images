@@ -1,5 +1,5 @@
 ####### BASE ############
-FROM jboss/wildfly:18.0.1.Final
+FROM jboss/wildfly:19.1.0.Final
 
 ####### MAINTAINER ############
 MAINTAINER "Michael Biarnes Kiefer" "mbiarnes@redhat.com"
@@ -15,7 +15,7 @@ ENV KIE_CONNECTION_DRIVER h2
 ENV KIE_CONNECTION_USER sa
 ENV KIE_CONNECTION_PASSWORD sa
 ENV KIE_CONNECTION_DATABASE kie
-LABEL org.kie.business-central.artifact=org.kie:business-central:war:wildfly18
+LABEL org.kie.business-central.artifact=org.kie:business-central:war:wildfly19
 
 ####### SYTEM USERS FOR DEVELOPMENT ############
 USER root
@@ -23,7 +23,7 @@ USER root
 RUN echo "root:rootman" | chpasswd && \
 echo "jboss:jboss" | chpasswd
 
-####### BUSINESS_CENTRAL & WILDFLY18 CONFIG FILES ############
+####### BUSINESS_CENTRAL & WILDFLY19 CONFIG FILES ############
 # Latest WAR from Maven repository & Custom WildFly configuration files
 # There is an issue in Docker with ADD command.
 # When a file is added into the container's filesystem, the file owner is always root, instead of the current running user.
