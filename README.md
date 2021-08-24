@@ -30,7 +30,7 @@ This images are quite different from the official community ones, that you can f
 
 The images from this project are more complex and intended for achieving continuous integration testing purposes, so they have additional features (not included in the community ones) such as:                   
 * They use latest CI builds for all KIE applications, instead of using official `Final` releases
-* There exist a Docker image for each KIE application that runs on WildFly 19
+* There exist a Docker image for each KIE application that runs on WildFly 23
 * Support for external MySQL and PostgreSQL databases                      
 * The web applications for the images are deployed as exploded war files by default
 * Each image contains helper scripts to achieve the different application servers and databases supported with just using Docker command line environment variables                            

@@ -18,7 +18,7 @@
       <groupId>org.kie</groupId>
       <artifactId>business-central</artifactId>
       <type>war</type>
-      <classifier>wildfly19</classifier>
+      <classifier>wildfly23</classifier>
     </dependency>
 
     <dependency>

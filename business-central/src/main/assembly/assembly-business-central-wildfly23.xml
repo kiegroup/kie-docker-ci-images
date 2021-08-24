@@ -5,7 +5,7 @@
     <!-- The war to include into docker container. -->
     <dependencySet>
       <includes>
-        <include>org.kie:business-central:war:wildfly19</include>
+        <include>org.kie:business-central:war:wildfly23</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>business-central.war</outputFileNameMapping>
