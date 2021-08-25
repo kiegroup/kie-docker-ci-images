@@ -18,7 +18,7 @@
             <groupId>org.kie</groupId>
             <artifactId>business-central</artifactId>
             <type>war</type>
-            <classifier>wildfly19</classifier>
+            <classifier>wildfly23</classifier>
         </dependency>
 
         <!-- Kie Server -->
@@ -41,8 +41,8 @@
             <artifactId>h2</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jboss.spec.javax.transaction</groupId>
-            <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -53,8 +53,8 @@
             <artifactId>slf4j-jdk14</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jboss.spec.javax.security.jacc</groupId>
-            <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+            <groupId>jakarta.security.jacc</groupId>
+            <artifactId>jakarta.security.jacc-api</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -94,12 +94,12 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>${docker.kie.repository}/business-central-wildfly19:${docker.build.kie.tag}</name>
-                            <alias>business-central-wildfly19-${docker.build.kie.tag}-h2</alias>
+                            <name>${docker.kie.repository}/business-central-wildfly23:${docker.build.kie.tag}</name>
+                            <alias>business-central-wildfly23-${docker.build.kie.tag}-h2</alias>
                             <build>
                                 <dockerFileDir>${project.build.outputDirectory}/wildfly</dockerFileDir>
                                 <assembly>
-                                    <descriptor>${pom.basedir}/src/main/assembly/assembly-business-central-wildfly19.xml</descriptor>
+                                    <descriptor>${pom.basedir}/src/main/assembly/assembly-business-central-wildfly23.xml</descriptor>
                                 </assembly>
                             </build>
                             <run>
@@ -122,7 +122,7 @@
                                     <time>${docker.run.timeout}</time>
                                 </wait>
                                 <log>
-                                    <prefix>business-central-wildfly19</prefix>
+                                    <prefix>business-central-wildfly23</prefix>
                                     <date>ISO8601</date>
                                     <color>blue</color>
                                 </log>
