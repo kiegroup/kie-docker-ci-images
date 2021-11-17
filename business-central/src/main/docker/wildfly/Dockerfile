@@ -30,12 +30,14 @@ echo "jboss:jboss" | chpasswd
 # See https://github.com/docker/docker/issues/5110
 # The workaround is doing a chown using root user and then switchback to jboss user.
 # WildFly custom configuration.
-ADD etc/business-central-users.properties $JBOSS_HOME/standalone/configuration/business-central-users.properties
-ADD etc/business-central-roles.properties $JBOSS_HOME/standalone/configuration/business-central-roles.properties
+# ADD etc/business-central-users.properties $JBOSS_HOME/standalone/configuration/business-central-users.properties
+#ADD etc/business-central-roles.properties $JBOSS_HOME/standalone/configuration/business-central-roles.properties
+ADD etc/kie-fs-realm-users $JBOSS_HOME/standalone/configuration/kie-fs-realm-users
 ADD etc/standalone-full-business-central.xml $JBOSS_HOME/standalone/configuration/standalone-full-business-central.xml
 # Custom business-central WildFly startup scripts.
 ADD etc/start_business-central.sh $JBOSS_HOME/bin/start_business-central.sh
 ADD etc/update-jpa-config.sh $JBOSS_HOME/bin/update-jpa-config.sh
+ADD etc/jBPMKeystore.jceks $JBOSS_HOME/standalone/configuration/jBPMKeystore.jceks
 # Add the business-central WAR artifact from the assembly result.
 ADD maven/business-central.war $JBOSS_HOME/standalone/deployments/business-central-archive.war
 
@@ -59,9 +61,11 @@ RUN chown -R jboss:jboss $JBOSS_HOME/standalone/deployments/* && \
 chmod +x $JBOSS_HOME/bin/*.sh && \
 chown jboss:jboss $JBOSS_HOME/bin/start_business-central.sh && \
 chown jboss:jboss $JBOSS_HOME/bin/update-jpa-config.sh && \
-chown jboss:jboss $JBOSS_HOME/standalone/configuration/business-central-users.properties && \
-chown jboss:jboss $JBOSS_HOME/standalone/configuration/business-central-roles.properties && \
+#chown jboss:jboss $JBOSS_HOME/standalone/configuration/business-central-users.properties && \
+#chown jboss:jboss $JBOSS_HOME/standalone/configuration/business-central-roles.properties && \
 chown jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full-business-central.xml && \
+chown jboss:jboss $JBOSS_HOME/standalone/configuration/kie-fs-realm-users && \
+chown jboss.jboss $JBOSS_HOME/standalone/configuration/jBPMKeystore.jceks && \
 chown -R jboss:jboss $JBOSS_HOME/modules/system/layers/base/*
 # Switchback to jboss user
 USER jboss
