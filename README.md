@@ -116,7 +116,8 @@ The mvn clean install creates two images as well as it runs them
   With this command you can run your own container:
 
     docker run -p 8082:8080 -p 8002:8001 -i -t --name <name> <imageName>:<tag>
-    i.e. docker run -p 8082:8080 -p 8002:8001 -i -t --name business-central kiegroup/business-central-wildfly23:7.63.0-SNAPSHOT
+for instance:
+    docker run -p 8082:8080 -p 8002:8001 -i -t --name business-central kiegroup/business-central-wildfly23:7.63.0-SNAPSHOT
 
   You can access the application in a browser: http://localhost:8082/business-central and login using wbadmin/wbadmin
 
