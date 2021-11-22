@@ -32,7 +32,7 @@
   <properties>
     <!-- Configurable properties for the build. -->
     <docker.daemon.rest.url>unix:///var/run/docker.sock</docker.daemon.rest.url>
-    <docker.kie.repository>jboss-kie</docker.kie.repository>
+    <docker.kie.repository>kiegroup</docker.kie.repository>
     <docker.kie.artifacts.version>${project.version}</docker.kie.artifacts.version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <kie.artifacts.deploy.path>${project.build.directory}/kie-artifacts</kie.artifacts.deploy.path>

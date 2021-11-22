@@ -17,16 +17,15 @@ The integration between Maven and Docker is done using the `docker-maven-plugin`
 KIE Docker images considerations
 --------------------------------
 
-The `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` modules are used to build the Docker image for each application.
+The `Business-Central Workbench`, `KIE Server Workbench`, `JBPM Server Full` modules are used to build the Docker image for each application.
 
 **IMPORTANT NOTE**                     
 This images are quite different from the official community ones, that you can find at:                   
-* [jBPM Workbench](https://registry.hub.docker.com/u/jboss/jbpm-workbench/)                      
-* [jBPM Workbench Showcase](https://registry.hub.docker.com/u/jboss/jbpm-workbench-showcase/)                        
-* [Drools Workbench](https://registry.hub.docker.com/u/jboss/drools-workbench/)                      
-* [Drools Workbench Showcase](https://registry.hub.docker.com/u/jboss/drools-workbench-showcase/)                      
-* [KIE Execution Server](https://registry.hub.docker.com/u/jboss/kie-server/)                      
-* [KIE Execution Server Showcase](https://registry.hub.docker.com/u/jboss/kie-server-showcase/)                      
+* [Business Central Workbench](https://quay.io/repository/kiegroup/business-central-workbench)                      
+* [Business Central Workbench Showcase](https://quay.io/repository/kiegroup/business-central-workbench-showcase)                        
+* [KIE Server](https://quay.io/repository/kiegroup/kie-server)                      
+* [Kie Server Showcase](https://quay.io/repository/kiegroup/kie-server-showcase)                      
+* [JBPM Server Full](https://quay.io/repository/kiegroup/jbpm-server-full)                       
 
 The images from this project are more complex and intended for achieving continuous integration testing purposes, so they have additional features (not included in the community ones) such as:                   
 * They use latest CI builds for all KIE applications, instead of using official `Final` releases
@@ -43,10 +42,9 @@ Build process
 
 The build process for this project consist of the following steps:                 
 * Build database WildFly modules artifacts that will be used for the next Docker images builds (module = `kie-jboss-modules`)                           
-* For each project's sub-module (`KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server`)
-    * Create Docker images for `KIE Workbench`, `KIE Drools Workbench`, `KIE Execution Server` using latest SNAPSHOT versions from both `master` and `product` branches
-    * Push the images into the Docker registry (this step is currently disabled)                                    
-    * Run a Docker container the each recently creaated image                    
+* For each project's sub-module (`Business Central Workbench Showcase`, `KIE Server`)
+    * Create Docker images for `Business Central Workbench Showcase`, `KIE Server` using latest SNAPSHOT versions from both `main` and `product` branches     
+    * Run a Docker container for each recently created image                    
 * Deploy the recently Maven artifacts used for the build into a local filesystem directory (for further consuming)                     
 * Create the Docker image for the KIE Docker UI web application used for handling all docker images stuff by common web interface and runs a containers for that image                        
 
@@ -57,7 +55,7 @@ The following Maven properties can be specified for customizing the Maven build 
 
 * `docker.daemon.rest.url` - The URL for the Docker daemon REST API. Defaults to `http://localhost:2375`.                                  
 * `docker.registry` - The URL for the docker registry, if push is enabled on build (currently disabled). Defaults to `localhost:5000`.                                  
-* `docker.kie.repository` - The repository name for the generated images. Defaults to `jboss-kie`.                                  
+* `docker.kie.repository` - The repository name for the generated images. Defaults to `kiegroup`.                                  
 * `kie.artifacts.deploy.path` - The target local path on filesystem where artifacts used in the build process will be deployed. Defaults to `/tmp/kie-artifacts`.
 
 Usage
@@ -89,6 +87,49 @@ You can run the build only for deploying KIE Maven artifacts using:
 
     mvn clean install -P !all,kie-artifacts
 
+BUILD and RUN the Docker images: 
+
+    mvn clean install -DskipTests
+
+  This will create two images:
+* kiegroup/business-central-wildfly23
+* kiegroup/kie-server-wildfly23
+
+The mvn clean install creates two images as well as it runs them
+
+  This command gets the IDs of all running containers
+  
+    docker ps -a
+
+  This command inspects a running container and extracts his {IP address}
+
+    docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+
+  Now having the IP address you can access
+
+  **kie-server**:       http://{IP address}:8080/kie-server/services/rest/server/ (login kie-server/kie-server)<br>
+  When you access **kie-server** you only get shown a xml.<br>
+  For more information about the [KIE Server](https://docs.jbpm.org/7.61.0.Final/jbpm-docs/html_single/#_ch.kie.server)
+  
+  **business central**: http://{IP address}:8080/business-central/ (login wbadmin/wbadmin) 
+
+  With this command you can run your own container:
+
+    docker run -p 8082:8080 -p 8002:8001 -i -t --name <name> <imageName>:<tag>
+    
+  for instance:
+
+    docker run -p 8082:8080 -p 8002:8001 -i -t --name business-central kiegroup/business-central-wildfly23:7.63.0-SNAPSHOT
+
+  You can access the application in a browser: http://localhost:8082/business-central and login using wbadmin/wbadmin
+
+Stop and remove containers and images
+  
+    docker stop $(docker ps -aq)    - stops **all** running container (or docker stop containerID)
+    docker rm $(docker ps -aq)      - removes **all** containers (or docker rm containerID)
+    docker rmi $(docker images -aq) - rmoves **all** images (or docker rmi imageID)
+
+
 NOTE: There exist some helper scripts to perform common maintenance tasks and run more complex builds located at  source folder `/scripts'. Feel free to take a look at them.
 
 Notes
@@ -96,4 +137,4 @@ Notes
 
 * This project is being used for Red Hat internal integration testing, so no security or high performance considerations have been applied. It's just a proof of concept to try to facilitate, automate and use a mechanism for our daily integration environment.                               
 * This continuous integration system is not designed to provide any kind of Docker orchestration mechanism or any Docker web application generic manager or stuff like that... it just provides an easy and automated way to integrate our Maven builds with Docker to achieve a basic CI mechanism for our daily development. If you are looking for a deep control of Docker management and orchestration features we recommend taking a look at [OpenShift](https://github.com/openshift/origin/) or [Kubernetes](http://kubernetes.io/).                 
-* This system has been developed and tested against a Docker installation for version `Docker version 1.6.2, build ba1f6c3/1.6.2` in a Red Hat Enterprise Linux version 7                       
+* This system has been developed and tested against a Docker installation for version `Docker version 20.10.9, build c2ea9bc` in a Red Hat Enterprise Linux version 7                       
